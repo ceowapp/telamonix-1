@@ -752,7 +752,7 @@ const ServiceCard = ({ service, index }) => {
             removeWrapper
             alt={service.title}
             className="z-0 w-full h-full object-cover transition-transform opacity-60 duration-300 group-hover:scale-110"
-            src={`/global/images/service/${service.id.toLowerCase().replace(/ /g, '-')}.png`}
+            src={`/images/global/service/${service.id.toLowerCase().replace(/ /g, '-')}.png`}
           />
           <CardFooter className="absolute bottom-0 z-20 w-full bg-gradient-to-t from-black/80 to-transparent">
             <motion.div

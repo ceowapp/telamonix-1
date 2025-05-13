@@ -1,9 +1,9 @@
 "use client"
-import React, { useEffect, useState, useMemo, useRef, Suspense, memo } from 'react';
+import React, { useEffect, useState, useMemo, useRef, Suspense } from 'react';
 import { SocialIcon } from 'react-social-icons';
 import { Grid, Typography, Container, Box, InputAdornment, TextField } from '@mui/material';
 import Link from 'next/link';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useGSAP } from "@gsap/react";
 import { Decal, Float, OrbitControls, Preload, useTexture, Text, Billboard, Sphere, MeshDistortMaterial, useGLTF, Environment, ContactShadows } from '@react-three/drei';
 import { Center, Instance, Instances } from "@react-three/drei";
@@ -12,13 +12,78 @@ import * as THREE from "three";
 import { CustomMaterial } from "./material";
 import { Canvas } from '@react-three/fiber';
 import SearchIcon from '@mui/icons-material/Search';
-import { ArrowRight, ChevronDown, ChevronUp } from 'react-feather'; 
-import CompanyLogo from '../CompanyLogo';
-import { languageMap } from '@/constants/data';
+import { ChevronDown, ChevronUp } from 'react-feather'; 
 
-interface FooterProps {
-  language: "en" | "zh" | "vi";
-}
+const ExpandableFooterLinks = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const services = [
+    "Web App Development",
+    "Mobile App Development",
+    "Low-code/No-code Development",
+    "Data Analytics",
+    "AR VR",
+    "QR Code",
+    "BIM Technology",
+    "Digital Twins",
+    "API Integration",
+    "Microservices Architecture",
+    "DevOps and CI/CD",
+    "AI Services",
+    "Cloud Computing",
+    "Serverless Computing",
+    "Cybersecurity",
+    "Business Automation",
+    "Gamification",
+    "IOT Development",
+    "Blockchain",
+    "Robotics Development",
+    "Quantum Computing",
+  ];
+
+  return (
+    <motion.div layout>
+      <ul className="text-left space-y-2">
+        {services.slice(0, 6).map((service, index) => (
+          <FooterLink key={index} href="/myspace/apps">
+            {service}
+          </FooterLink>
+        ))}
+      </ul>
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.ul
+            className="text-left space-y-2 mt-2"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            {services.slice(6).map((service, index) => (
+              <FooterLink key={index + 6} href="/myspace/apps">
+                {service}
+              </FooterLink>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+      <motion.button
+        className="mt-4 text-indigo-400 hover:text-indigo-300 transition-colors duration-300 flex items-center"
+        onClick={() => setIsExpanded(!isExpanded)}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <span className="mr-2">{isExpanded ? 'Collapse' : 'Expand'}</span>
+        <motion.div
+          initial={false}
+          animate={{ rotate: isExpanded ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+        </motion.div>
+      </motion.button>
+    </motion.div>
+  );
+};
 
 const SocialLink = ({ href, network, bgColor }) => (
   <motion.div
@@ -59,7 +124,7 @@ const SocialLinks = () => (
   >
     <SocialLink href="https://www.linkedin.com/in/nguyen-dat-5b1812324/" network="linkedin" bgColor="#0077B5" />
     <SocialLink href="https://github.com/ceowapp" network="github" bgColor="#333" />
-    <SocialLink href="https://www.facebook.com/wappinc" network="facebook" bgColor="#1877F2" />
+    <SocialLink href="https://www.facebook.com/telamonix" network="facebook" bgColor="#1877F2" />
     <SocialLink href="https://www.youtube.com/@telamonix" network="youtube" bgColor="#FF0000" />
     <SocialLink href="https://x.com/CEOTelamonix" network="twitter" bgColor="#1DA1F2" />
   </motion.div>
@@ -264,91 +329,7 @@ const FooterLink = ({ href, children }) => (
   </motion.li>
 );
 
-const ExpandableFooterLinks = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const services = [
-    "WApp Document Editor",
-    "WApp Code Editor",
-    "WApp Image Editor",
-    "WApp Video Editor",
-    "WApp Audio Editor",
-    "WApp Central Hub",
-    "WApp Book",
-    "WApp Music",
-    "WApp AI Tranining",
-    "WApp Marketing",
-    "WApp Ecommerce",
-  ];
-
-  return (
-    <motion.div layout>
-      <ul className="text-left space-y-2">
-        {services.slice(0, 6).map((service, index) => (
-          <FooterLink key={index} href="/myspace/apps">
-            {service}
-          </FooterLink>
-        ))}
-      </ul>
-      <AnimatePresence>
-        {isExpanded && (
-          <motion.ul
-            className="text-left space-y-2 mt-2"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            {services.slice(6).map((service, index) => (
-              <FooterLink key={index + 6} href="/myspace/apps">
-                {service}
-              </FooterLink>
-            ))}
-          </motion.ul>
-        )}
-      </AnimatePresence>
-      <motion.button
-        className="mt-4 text-indigo-400 hover:text-indigo-300 transition-colors duration-300 flex items-center"
-        onClick={() => setIsExpanded(!isExpanded)}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <span className="mr-2">{isExpanded ? 'Collapse' : 'Expand'}</span>
-        <motion.div
-          initial={false}
-          animate={{ rotate: isExpanded ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-        </motion.div>
-      </motion.button>
-    </motion.div>
-  );
-};
-
-const TelamonixLink = () => (
-  <motion.li
-    className="py-2 mt-6"
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-  >
-    <Link target="_blank" href="https://telamonix.vercel.app/" passHref>
-      <motion.div className="flex items-center justify-between bg-indigo-600 text-white px-6 py-2 rounded-full shadow-lg hover:bg-indigo-700 transition-colors duration-300">
-        <span className="mr-2">Telamonix Services</span>
-        <motion.div
-          initial={{ x: 0 }}
-          animate={{ x: [0, 5, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
-        >
-          <ArrowRight className="w-6 h-6" />
-        </motion.div>
-      </motion.div>
-    </Link>
-  </motion.li>
-);
-
-export const Footer = memo(({ language = 'en' }: FooterProps) => {
-  const { aboutColumn, solutionsColumn, divisionsColumn, contactColumn } = languageMap[language];
-
+export const Footer = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearchChange = (event) => {
@@ -362,7 +343,7 @@ export const Footer = memo(({ language = 'en' }: FooterProps) => {
   };
 
   return (
-    <Box component="footer" className="bg-gradient-to-b px-14 from-black/90 via-gray-900 to-gray-800/90 text-white py-12">
+    <Box component="footer" className="rounded-t-3xl bg-gradient-to-b px-14 from-black/90 via-gray-900 to-gray-800/90 text-white py-12">
       <Container maxWidth="xl">
         <Grid container spacing={8} justifyContent="center">
           <Grid item xs={12} sm={6} md={3}>
@@ -376,7 +357,7 @@ export const Footer = memo(({ language = 'en' }: FooterProps) => {
               <FooterLink href="/tos">Terms</FooterLink>
               <FooterLink href="/tos">Privacy</FooterLink>
             </ul>
-             <form onSubmit={handleSearchSubmit} className="flex text-gray-50 justify-center mt-16">
+            <form onSubmit={handleSearchSubmit} className="flex text-gray-50 justify-center mt-16">
               <TextField
                 variant="outlined"
                 placeholder="Search..."
@@ -415,12 +396,9 @@ export const Footer = memo(({ language = 'en' }: FooterProps) => {
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <Typography variant="h6" component="h3" gutterBottom className="text-left font-bold text-indigo-400">
-              PRODUCTS
+              SERVICES
             </Typography>
-            <ul className="text-left space-y-2">
-              <ExpandableFooterLinks />
-              <TelamonixLink />
-            </ul>
+            <ExpandableFooterLinks />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <Typography variant="h6" component="h3" gutterBottom className="text-left font-bold text-indigo-400">
@@ -446,7 +424,7 @@ export const Footer = memo(({ language = 'en' }: FooterProps) => {
             </Box>
           </Grid>
         </Grid>
-        <Box className="relative flex items-center justify-center mt-12 minphonemd2:absolute minphonemd2:bottom-96 minphonemd2:right-8 mintabletmd3:bottom-56 mintabletmd3:right-16">
+        <Box className="relative flex items-center justify-center mt-12 mobileL:absolute mobileL:bottom-96 mobileL:right-6 mobileXL:bottom-52 mobileXL:right-16">
           <Box style={{ width: '200px', height: '200px' }}>
             <Canvas camera={{ position: [0, 0, 30], fov: 90 }}>
               <ambientLight intensity={0.5} />
@@ -459,15 +437,12 @@ export const Footer = memo(({ language = 'en' }: FooterProps) => {
             </Canvas>
           </Box>
         </Box>
-        <Box className="border-t border-gray-700 mt-16 pt-12 text-center">
+        <Box className="border-t border-gray-700 mt-16 pt-8 text-center">
           <Typography variant="body2" className="text-gray-400">
-            &copy; {new Date().getFullYear()} WApp. All rights reserved.
+            &copy; {new Date().getFullYear()} Telamonix. All rights reserved.
           </Typography>
         </Box>
       </Container>
     </Box>
   );
-});
-
-
-
+}

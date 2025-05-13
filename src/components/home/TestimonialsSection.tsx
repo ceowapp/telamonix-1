@@ -9,18 +9,18 @@ import {Avatar, AvatarGroup, AvatarIcon} from "@nextui-org/avatar";
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
 const testimonials = [
-  { name: 'John Doe', role: 'CEO, Tech Corp', quote: 'Their IT solutions transformed our business operations.', rating: 5, avatar: '/global/images/avatar/john.png' },
-  { name: 'Jane Smith', role: 'CTO, Innovate Inc', quote: 'Exceptional service and cutting-edge technology.', rating: 4, avatar: '/global/images/avatar/jane.png' },
-  { name: 'Mike Johnson', role: 'Founder, StartUp', quote: 'They helped us scale our infrastructure seamlessly.', rating: 5, avatar: '/global/images/avatar/mike.png' },
-  { name: 'Emily Brown', role: 'COO, Global Solutions', quote: 'Their team expertise is unmatched in the industry.', rating: 5, avatar: '/global/images/avatar/emily.png' },
-  { name: 'Alex Lee', role: 'IT Director, Enterprise Co', quote: 'Reliable, innovative, and always ahead of the curve.', rating: 4, avatar: '/global/images/avatar/alex.png' },
-  { name: 'Sarah Chen', role: 'VP of Engineering, TechGiant', quote: 'Their solutions have consistently exceeded our expectations.', rating: 5, avatar: '/global/images/avatar/sarah.png' },
-  { name: 'David Wilson', role: 'CIO, MegaCorp', quote: 'Their cybersecurity measures are top-notch.', rating: 5, avatar: '/global/images/avatar/david.png' },
-  { name: 'Lisa Taylor', role: 'Head of IT, Global Bank', quote: `They've revolutionized our data management systems.`, rating: 4, avatar: '/global/images/avatar/lisa.png' },
-  { name: 'Robert Green', role: 'Tech Lead, E-commerce Giant', quote: 'Their cloud solutions have improved our efficiency tenfold.', rating: 5, avatar: '/global/images/avatar/robert.png' },
-  { name: 'Emma Davis', role: 'Founder, AI Startup', quote: 'Their AI integration services are second to none.', rating: 5, avatar: '/global/images/avatar/emma.png' },
-  { name: 'Chris Wong', role: 'CTO, FinTech Innovators', quote: `They've helped us stay ahead in a competitive market.`, rating: 4, avatar: '/global/images/avatar/chris.png' },
-  { name: 'Olivia Martinez', role: 'VP of Operations, Logistics Co', quote: 'Their IoT solutions have transformed our supply chain.', rating: 5, avatar: '/global/images/avatar/olivia.png' },
+  { name: 'John Doe', role: 'CEO, Tech Corp', quote: 'Their IT solutions transformed our business operations.', rating: 5, avatar: '/images/global/avatar/john.png' },
+  { name: 'Jane Smith', role: 'CTO, Innovate Inc', quote: 'Exceptional service and cutting-edge technology.', rating: 4, avatar: '/images/global/avatar/jane.png' },
+  { name: 'Mike Johnson', role: 'Founder, StartUp', quote: 'They helped us scale our infrastructure seamlessly.', rating: 5, avatar: '/images/global/avatar/mike.png' },
+  { name: 'Emily Brown', role: 'COO, Global Solutions', quote: 'Their team expertise is unmatched in the industry.', rating: 5, avatar: '/images/global/avatar/emily.png' },
+  { name: 'Alex Lee', role: 'IT Director, Enterprise Co', quote: 'Reliable, innovative, and always ahead of the curve.', rating: 4, avatar: '/images/global/avatar/alex.png' },
+  { name: 'Sarah Chen', role: 'VP of Engineering, TechGiant', quote: 'Their solutions have consistently exceeded our expectations.', rating: 5, avatar: '/images/global/avatar/sarah.png' },
+  { name: 'David Wilson', role: 'CIO, MegaCorp', quote: 'Their cybersecurity measures are top-notch.', rating: 5, avatar: '/images/global/avatar/david.png' },
+  { name: 'Lisa Taylor', role: 'Head of IT, Global Bank', quote: `They've revolutionized our data management systems.`, rating: 4, avatar: '/images/global/avatar/lisa.png' },
+  { name: 'Robert Green', role: 'Tech Lead, E-commerce Giant', quote: 'Their cloud solutions have improved our efficiency tenfold.', rating: 5, avatar: '/images/global/avatar/robert.png' },
+  { name: 'Emma Davis', role: 'Founder, AI Startup', quote: 'Their AI integration services are second to none.', rating: 5, avatar: '/images/global/avatar/emma.png' },
+  { name: 'Chris Wong', role: 'CTO, FinTech Innovators', quote: `They've helped us stay ahead in a competitive market.`, rating: 4, avatar: '/images/global/avatar/chris.png' },
+  { name: 'Olivia Martinez', role: 'VP of Operations, Logistics Co', quote: 'Their IoT solutions have transformed our supply chain.', rating: 5, avatar: '/images/global/avatar/olivia.png' },
 ];
 
 const testimonialGroups = [
