@@ -103,7 +103,7 @@ const CareerListSection: React.FC<CareerListSectionProps> = ({
         <div className="w-full md:w-2/3 lg:w-3/4">
           <div className="mb-8">
             <h1 className="text-xl sm:text-2xl font-semibold">
-              {careerLocaleMap.recommendedJobs[language]}: <span className="text-title-regular-black px-4 py-1 rounded-full border-[1px] border-[#D1D1D1]">{filteredJobs.length}</span>
+              {careerLocaleMap.recommendedJobs[language]}: <span className="text-white px-4 py-1 rounded-full border-[1px] border-[#D1D1D1]">{filteredJobs.length}</span>
             </h1>
           </div>
           {showLoading ? (

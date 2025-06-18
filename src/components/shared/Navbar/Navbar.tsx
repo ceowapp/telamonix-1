@@ -134,7 +134,7 @@ return (
     className="z-[55] nav-header dark:shadow-blue bg-transparent fixed top-0 items-center self-center flex w-full max-w-full justify-center gap-5 my-auto maxtabletmd1:block"
   >
     <div className="flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-16 items-center">
-      <div className="flex-shrink-0 absolute w-12 h-12">
+      <div className="cursor-pointer z-[9999] flex-shrink-0 absolute w-12 h-12">
        <div className="text-gray-800 font-semibold text-xl">
           <CompanyLogo imageUrl={logoPath} language={language} />
         </div>
@@ -181,10 +181,10 @@ return (
               <MenuWrapper className="w-[72rem]" index={0} hovering={hovering}>
                 <SolutionMenu ref={ref => refs.current[0] = ref} />
               </MenuWrapper>
-              <MenuWrapper className="w-[36rem]" index={1} hovering={hovering}>
+              <MenuWrapper className="w-[56rem]" index={1} hovering={hovering}>
                 <DeveloperMenu ref={ref => refs.current[1] = ref} />
               </MenuWrapper>
-              <MenuWrapper className="w-[36rem]" index={2} hovering={hovering}>
+              <MenuWrapper className="w-[56rem]" index={2} hovering={hovering}>
                 <ResourceMenu ref={ref => refs.current[2] = ref} />
               </MenuWrapper>
             </div>

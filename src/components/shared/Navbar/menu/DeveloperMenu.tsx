@@ -159,7 +159,7 @@ export const DeveloperMenu = forwardRef<HTMLDivElement>((props, ref) => {
       id="w-dropdown-list-0"
       aria-labelledby="w-dropdown-toggle-0"
     >
-      <div className="w-full max-w-4xl bg-purple-900 flex justify-between">
+      <div className="w-full bg-purple-900 flex justify-between">
         <div className="w-full px-6 py-8 flex gap-x-8">
           {capabilities.map((section, index) => (
             <div key={index} className="flex flex-col h-full">

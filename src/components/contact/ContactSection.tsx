@@ -133,7 +133,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({
          <div className="xl:col-span-1">
             <ContactCard language={language} texts={contactData} fields={contactFields} />
          </div>
-         <div className="rounded-[40px] xl:col-span-2 h-[300px] sm:h-[400px] md:h-[600px] xl:h-full bg-gray-100 rounded-xl overflow-hidden">
+         <div className="rounded-[40px] xl:col-span-2 h-[300px] sm:h-[400px] md:h-[600px] xl:h-full overflow-hidden">
            <Carousel images={carouselItems} withSlideIndicator={true} />
          </div>
        </div>

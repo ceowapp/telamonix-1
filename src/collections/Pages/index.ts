@@ -508,7 +508,7 @@ export const Pages: CollectionConfig<'pages'> = {
                   name: 'site',
                   type: 'text',
                   admin: {
-                    description: 'Twitter handle for the website (e.g., @naiscorp)',
+                    description: 'Twitter handle for the website (e.g., @telamonix)',
                   }
                 },
                 {

@@ -24,7 +24,7 @@ const CareerCard: React.FC<CareerCardProps> = ({
 }) => {
   return (
     <div className="w-full flex items-center justify-center sm:justify-start">
-      <div className="relative w-full max-w-[400px] bg-white border border-gray-200 rounded-[20px] p-4 shadow-sm hover:shadow-md transition-shadow duration-200">
+      <div className="relative w-full max-w-[400px] bg-[#12033a] border border-gray-200 rounded-[20px] p-4 shadow-sm hover:shadow-md transition-shadow duration-200">
         {insetStyle && (
           <div 
             className="absolute inset-0 z-0 overflow-hidden"
@@ -65,7 +65,7 @@ const CareerCard: React.FC<CareerCardProps> = ({
             {tags.map((tag, idx) => (
               <span
                 key={idx}
-                className="bg-white text-body-small-black-2 px-4 py-1 rounded-full"
+                className="bg-[#12033a] text-body-small-black-2 px-4 py-1 rounded-full"
               >
                 {tag}
               </span>
