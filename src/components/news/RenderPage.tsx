@@ -22,7 +22,7 @@ export const RenderPage: React.FC<RenderPageProps> = ({ sections, language = "en
     return null;
   }
   return (
-    <div className="bg-lightGrey pt-[80px]">
+    <div className="pt-[80px]">
       <div className="w-full px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-8">
         <div className="w-full mx-auto">
           <div className="flex flex-col xl:flex-row">

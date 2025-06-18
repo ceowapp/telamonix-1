@@ -13,6 +13,7 @@ interface Project {
   title: string;
   description: string;
   videoUrl: string;
+  embedId: string; // YouTube video ID for embedding
   tags: string[];
 }
 
@@ -22,6 +23,7 @@ const projects: Project[] = [
     title: "Neural Interface",
     description: "Revolutionary brain-computer interface enabling direct thought translation to digital commands.",
     videoUrl: "https://youtu.be/sQ22pm-xvrE?si=w5s95UF5EY25HOdO",
+    embedId: "sQ22pm-xvrE", // Extracted from YouTube URL
     tags: ["AI", "Hardware", "Biotech"]
   },
   {
@@ -29,6 +31,7 @@ const projects: Project[] = [
     title: "Quantum Mesh",
     description: "Distributed quantum computing network for solving complex mathematical problems at scale.",
     videoUrl: "https://youtu.be/pQpFebyALV0?si=cQ96mIn4Xq9qOh7V",
+    embedId: "pQpFebyALV0",
     tags: ["Quantum", "Network", "Computing"]
   },
   {
@@ -36,6 +39,7 @@ const projects: Project[] = [
     title: "Holographic Display",
     description: "True 3D holographic projection system for immersive data visualization and interaction.",
     videoUrl: "https://youtu.be/sQ22pm-xvrE?si=1tzGvgIFSnyKoasV",
+    embedId: "sQ22pm-xvrE",
     tags: ["AR", "3D", "Display"]
   },
   {
@@ -43,6 +47,7 @@ const projects: Project[] = [
     title: "Synthetic Biology",
     description: "Programmable biological systems for environmental restoration and material synthesis.",
     videoUrl: "https://youtu.be/sQ22pm-xvrE?si=w5s95UF5EY25HOdO",
+    embedId: "sQ22pm-xvrE",
     tags: ["Biology", "Environment", "Materials"]
   },
   {
@@ -50,6 +55,7 @@ const projects: Project[] = [
     title: "Space Elevator",
     description: "Carbon nanotube tether system for cost-effective orbital transportation infrastructure.",
     videoUrl: "https://youtu.be/sQ22pm-xvrE?si=1tzGvgIFSnyKoasV",
+    embedId: "sQ22pm-xvrE",
     tags: ["Space", "Materials", "Transport"]
   }
 ];
@@ -69,9 +75,10 @@ const ProjectShowcase = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const projectsListRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLIFrameElement>(null);
   const projectInfoRef = useRef<HTMLDivElement>(null);
   const [currentProject, setCurrentProject] = useState(0);
+  const [useYouTube, setUseYouTube] = useState(true); // Toggle between YouTube and placeholder
   const scrollTriggersRef = useRef<ScrollTrigger[]>([]);
 
   const { scrollYProgress } = useScroll({
@@ -110,8 +117,8 @@ const ProjectShowcase = () => {
       Array.from(projectElements).forEach((element, index) => {
         const trigger = ScrollTrigger.create({
           trigger: element,
-          start: "top 70%", // Start earlier to prevent flickering
-          end: "bottom 30%", // End later to prevent flickering
+          start: "top 70%",
+          end: "bottom 30%",
           scroller: scrollContainerRef.current,
           onEnter: () => {
             console.log(`Entering project ${index}`);
@@ -121,7 +128,6 @@ const ProjectShowcase = () => {
             console.log(`Entering back project ${index}`);
             setCurrentProject(index);
           },
-          // Remove onLeaveBack to prevent conflicts
         });
         
         scrollTriggersRef.current.push(trigger);
@@ -133,7 +139,7 @@ const ProjectShowcase = () => {
       scrollTriggersRef.current.forEach(st => st.kill());
       scrollTriggersRef.current = [];
     };
-  }, []); // Remove currentProject from dependency array
+  }, []);
 
   // Separate effect for animations when currentProject changes
   useEffect(() => {
@@ -155,6 +161,69 @@ const ProjectShowcase = () => {
       );
     }
   };
+
+  // YouTube embed component
+  const YouTubeEmbed = ({ embedId, title }: { embedId: string; title: string }) => (
+    <iframe
+      ref={videoRef}
+      className="w-[420px] xl:w-[520px] h-[280px] xl:h-[360px] rounded-2xl border-2 border-cyan-400/50 shadow-2xl shadow-cyan-400/30"
+      src={`https://www.youtube.com/embed/${embedId}?autoplay=1&mute=1&loop=1&playlist=${embedId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1`}
+      title={title}
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+    />
+  );
+
+  // Placeholder video component (for when YouTube isn't available)
+  const PlaceholderVideo = ({ title }: { title: string }) => (
+    <div className="w-[420px] xl:w-[520px] h-[280px] xl:h-[360px] rounded-2xl border-2 border-cyan-400/50 shadow-2xl shadow-cyan-400/30 bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center relative overflow-hidden">
+      {/* Animated background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 to-purple-900/20" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_rgba(0,0,0,0.3)_100%)]" />
+      
+      {/* Content */}
+      <div className="relative z-10 text-center p-8">
+        <div className="w-16 h-16 mx-auto mb-4 border-2 border-cyan-400 rounded-full flex items-center justify-center">
+          <svg className="w-8 h-8 text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
+        <h3 className="text-white font-mono text-lg mb-2">{title}</h3>
+        <p className="text-gray-400 text-sm">Demo Video</p>
+      </div>
+      
+      {/* Animated elements */}
+      <div className="absolute top-4 left-4 w-2 h-2 bg-cyan-400 rounded-full animate-ping" />
+      <div className="absolute bottom-4 right-4 w-1 h-1 bg-purple-400 rounded-full animate-pulse" />
+    </div>
+  );
+
+  // Mobile YouTube embed
+  const MobileYouTubeEmbed = ({ embedId, title }: { embedId: string; title: string }) => (
+    <iframe
+      className="w-full max-w-md h-48 sm:h-64 md:h-80 rounded-xl border-2 border-cyan-400/50 shadow-xl shadow-cyan-400/20"
+      src={`https://www.youtube.com/embed/${embedId}?autoplay=1&mute=1&loop=1&playlist=${embedId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1`}
+      title={title}
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+    />
+  );
+
+  // Mobile placeholder video
+  const MobilePlaceholderVideo = ({ title }: { title: string }) => (
+    <div className="w-full max-w-md h-48 sm:h-64 md:h-80 rounded-xl border-2 border-cyan-400/50 shadow-xl shadow-cyan-400/20 bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 to-purple-900/20" />
+      <div className="relative z-10 text-center p-6">
+        <div className="w-12 h-12 mx-auto mb-3 border-2 border-cyan-400 rounded-full flex items-center justify-center">
+          <svg className="w-6 h-6 text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
+        <h3 className="text-white font-mono text-base mb-1">{title}</h3>
+        <p className="text-gray-400 text-xs">Demo Video</p>
+      </div>
+    </div>
+  );
 
   // Gradient tiles background component
   const GradientTiles = () => (
@@ -207,23 +276,30 @@ const ProjectShowcase = () => {
 
       {/* Additional glowing effects */}
       <div className="absolute inset-0 opacity-20">
-        {/* Corner accent tiles */}
         <div className="absolute top-0 left-0 w-16 h-16 bg-gradient-to-br from-purple-500/40 to-transparent blur-xl animate-pulse" style={{ animationDelay: '0s' }} />
         <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-violet-500/40 to-transparent blur-xl animate-pulse" style={{ animationDelay: '1s' }} />
         <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-purple-500/40 to-transparent blur-xl animate-pulse" style={{ animationDelay: '2s' }} />
         <div className="absolute bottom-0 right-0 w-16 h-16 bg-gradient-to-tl from-violet-500/40 to-transparent blur-xl animate-pulse" style={{ animationDelay: '3s' }} />
 
-        {/* Center glow */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-gradient-radial from-purple-400/30 via-violet-400/20 to-transparent rounded-full blur-2xl animate-pulse" style={{ animationDelay: '0.5s' }} />
       </div>
 
-      {/* Subtle overlay gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 via-transparent to-violet-900/10" />
     </div>
   );
 
   return (
     <div ref={containerRef} className="relative min-h-screen overflow-hidden bg-black">
+      {/* Video Source Toggle (for development) */}
+      <div className="fixed top-4 right-4 z-50">
+        <button
+          onClick={() => setUseYouTube(!useYouTube)}
+          className="px-4 py-2 bg-cyan-500/20 border border-cyan-500/50 rounded-lg text-cyan-400 text-sm font-mono hover:bg-cyan-500/30 transition-colors"
+        >
+          {useYouTube ? 'YouTube ON' : 'Placeholder'}
+        </button>
+      </div>
+
       {/* Futuristic Background */}
       <div className="absolute inset-0 z-0">
         {/* Animated Grid */}
@@ -282,19 +358,17 @@ const ProjectShowcase = () => {
 
                 {/* Video container */}
                 <div className="relative">
-                  <video
-                    ref={videoRef}
-                    className="w-[420px] xl:w-[520px] h-[280px] xl:h-[360px] object-cover rounded-2xl border-2 border-cyan-400/50 shadow-2xl shadow-cyan-400/30"
-                    autoPlay
-                    muted
-                    loop
-                    key={currentProject}
-                  >
-                    <source src={projects[currentProject]?.videoUrl} type="video/mp4" />
-                  </video>
+                  {useYouTube ? (
+                    <YouTubeEmbed 
+                      embedId={projects[currentProject]?.embedId} 
+                      title={projects[currentProject]?.title}
+                    />
+                  ) : (
+                    <PlaceholderVideo title={projects[currentProject]?.title} />
+                  )}
 
                   {/* Video overlay effects */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-transparent via-transparent to-cyan-400/10" />
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-transparent via-transparent to-cyan-400/10 pointer-events-none" />
                   <div className="absolute -top-3 -right-3 w-6 h-6 bg-cyan-400 rounded-full animate-ping" />
 
                   {/* Video info overlay */}
@@ -400,14 +474,14 @@ const ProjectShowcase = () => {
 
                     {/* Video container */}
                     <div className="relative">
-                      <video
-                        className="w-full max-w-md h-48 sm:h-64 md:h-80 object-cover rounded-xl border-2 border-cyan-400/50 shadow-xl shadow-cyan-400/20"
-                        autoPlay
-                        muted
-                        loop
-                      >
-                        <source src={project.videoUrl} type="video/mp4" />
-                      </video>
+                      {useYouTube ? (
+                        <MobileYouTubeEmbed 
+                          embedId={project.embedId} 
+                          title={project.title}
+                        />
+                      ) : (
+                        <MobilePlaceholderVideo title={project.title} />
+                      )}
 
                       {/* Video info overlay */}
                       <div className="absolute bottom-3 left-3 right-3 bg-black/70 backdrop-blur-sm rounded-lg p-2 border border-cyan-400/30">
@@ -428,70 +502,70 @@ const ProjectShowcase = () => {
                     {/* Project Number */}
                     <div className="flex items-center mb-6">
                       <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-cyan-400 flex items-center justify-center text-cyan-400 font-mono text-sm sm:text-lg mr-4 sm:mr-6 shadow-lg shadow-cyan-400/30 bg-cyan-400/10">
-                        {String(index + 1).padStart(2, '0')}
-                      </div>
-                      <div className="h-px bg-gradient-to-r from-cyan-400 via-purple-400 to-transparent flex-1" />
-                    </div>
+                       {String(index + 1).padStart(2, '0')}
+                     </div>
+                     <div className="h-px bg-gradient-to-r from-cyan-400 via-purple-400 to-transparent flex-1" />
+                   </div>
 
-                    {/* Project Title */}
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-white via-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4 sm:mb-6 font-mono tracking-tight leading-tight">
-                      {project.title}
-                    </h2>
+                   {/* Project Title */}
+                   <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-white via-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4 sm:mb-6 font-mono tracking-tight leading-tight">
+                     {project.title}
+                   </h2>
 
-                    {/* Project Description */}
-                    <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 font-light">
-                      {project.description}
-                    </p>
+                   {/* Project Description */}
+                   <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 font-light">
+                     {project.description}
+                   </p>
 
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8">
-                      {project.tags.map((tag, tagIndex) => (
-                        <span
-                          key={tagIndex}
-                          className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-mono bg-cyan-400/10 border border-cyan-400/30 rounded-full text-cyan-400 hover:bg-cyan-400/20 transition-all duration-300"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                   {/* Tags */}
+                   <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8">
+                     {project.tags.map((tag, tagIndex) => (
+                       <span
+                         key={tagIndex}
+                         className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-mono bg-cyan-400/10 border border-cyan-400/30 rounded-full text-cyan-400 hover:bg-cyan-400/20 transition-all duration-300"
+                       >
+                         {tag}
+                       </span>
+                     ))}
+                   </div>
 
-                    {/* CTA Button */}
-                    <button className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full text-white font-semibold overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-400/25">
-                      <span className="relative z-10 flex items-center justify-center">
-                        Explore Project
-                        <svg className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                      </span>
-                      <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </button>
+                   {/* CTA Button */}
+                   <button className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full text-white font-semibold overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-400/25">
+                     <span className="relative z-10 flex items-center justify-center">
+                       Explore Project
+                       <svg className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                       </svg>
+                     </span>
+                     <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                   </button>
 
-                    {/* Project Stats */}
-                    <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-8 text-sm text-gray-400">
-                      <div>
-                        <span className="text-cyan-400 font-mono">STATUS:</span> Active
-                      </div>
-                      <div>
-                        <span className="text-cyan-400 font-mono">YEAR:</span> {2024 - index}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+                   {/* Project Stats */}
+                   <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-8 text-sm text-gray-400">
+                     <div>
+                       <span className="text-cyan-400 font-mono">STATUS:</span> Active
+                     </div>
+                     <div>
+                       <span className="text-cyan-400 font-mono">YEAR:</span> {2024 - index}
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           ))}
+         </div>
+       </div>
+     </div>
 
-      {/* Scroll Indicator - Desktop Only */}
-      <div className="hidden lg:block fixed bottom-8 left-1/2 transform -translate-x-1/2 z-30">
-        <div className="flex flex-col items-center text-cyan-400/60 text-sm font-mono">
-          <div className="w-px h-12 bg-gradient-to-b from-cyan-400/60 to-transparent" />
-          <span>SCROLL TO EXPLORE</span>
-        </div>
-      </div>
-    </div>
-  );
+     {/* Scroll Indicator - Desktop Only */}
+     <div className="hidden lg:block fixed bottom-8 left-1/2 transform -translate-x-1/2 z-30">
+       <div className="flex flex-col items-center text-cyan-400/60 text-sm font-mono">
+         <div className="w-px h-12 bg-gradient-to-b from-cyan-400/60 to-transparent" />
+         <span>SCROLL TO EXPLORE</span>
+       </div>
+     </div>
+   </div>
+ );
 };
 
 export default ProjectShowcase;

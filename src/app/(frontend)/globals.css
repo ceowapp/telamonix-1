@@ -1290,7 +1290,7 @@ layer base {
   }
 
   .text-body-regular-black-contact {
-    @apply font-normal !text-[16px] !text-[#E2E8F0];
+    @apply font-normal !text-[16px] !text-[#6D6D6D];
   }
 
   .text-body-regular-black-1 {
@@ -1610,7 +1610,7 @@ layer base {
   .text-display-bold-black {
     @apply font-bold
       !text-[42px] sm:!text-[44px] md:!text-[46px] lg:!text-[48px]
-      text-[#E2E8F0];
+      text-[#454545];
   }
 
   .text-display-medium-white {
