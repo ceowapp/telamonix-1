@@ -260,7 +260,7 @@ return (
                         key={subIndex}
                         color="foreground"
                         className="block w-full py-2 hover:bg-gray-800 rounded-md transition-colors duration-300"
-                        href={subItem.link}
+                        href={subItem?.href}
                         size="lg"
                         whileHover={{ x: 5 }}
                       >
