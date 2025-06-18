@@ -65,7 +65,7 @@ const CareerCard: React.FC<CareerCardProps> = ({
             {tags.map((tag, idx) => (
               <span
                 key={idx}
-                className="bg-[#12033a] text-body-small-black-2 px-4 py-1 rounded-full"
+                className="bg-[#12033a] text-white px-4 py-1 rounded-full"
               >
                 {tag}
               </span>

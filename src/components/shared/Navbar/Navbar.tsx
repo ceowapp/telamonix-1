@@ -35,23 +35,25 @@ import {
 import LanguageSelector from "../LanguageSelector";
 import './style.css';
 
+const IconSizeClasses = "w-6 h-6 text-white";
+
 const icons = {
-  globe: <GlobeIcon />,
-  deviceMobile: <DeviceMobileIcon />,
-  cpu: <ChipIcon />,
-  chartBar: <ChartBarIcon />,
-  cloud: <CloudIcon />,
-  cog: <CogIcon />,
-  folder: <FolderIcon />,
-  currencyDollar: <CurrencyDollarIcon />,
-  office: <OfficeBuildingIcon />,
-  code: <CodeIcon />,
-  users: <UsersIcon />,
-  informationCircle: <InformationCircleIcon />,
-  support: <SupportIcon />,
-  lightBulb: <LightBulbIcon />,
-  collection: <CollectionIcon />,
-  briefcase: <BriefcaseIcon />,
+  globe: <GlobeIcon className={IconSizeClasses} />,
+  deviceMobile: <DeviceMobileIcon className={IconSizeClasses} />,
+  cpu: <ChipIcon className={IconSizeClasses} />,
+  chartBar: <ChartBarIcon className={IconSizeClasses} />,
+  cloud: <CloudIcon className={IconSizeClasses} />,
+  cog: <CogIcon className={IconSizeClasses} />,
+  folder: <FolderIcon className={IconSizeClasses} />,
+  currencyDollar: <CurrencyDollarIcon className={IconSizeClasses} />,
+  office: <OfficeBuildingIcon className={IconSizeClasses} />,
+  code: <CodeIcon className={IconSizeClasses} />,
+  users: <UsersIcon className={IconSizeClasses} />,
+  informationCircle: <InformationCircleIcon className={IconSizeClasses} />,
+  support: <SupportIcon className={IconSizeClasses} />,
+  lightBulb: <LightBulbIcon className={IconSizeClasses} />,
+  collection: <CollectionIcon className={IconSizeClasses} />,
+  briefcase: <BriefcaseIcon className={IconSizeClasses} />,
 };
 
 const MotionLink = motion(Link);
