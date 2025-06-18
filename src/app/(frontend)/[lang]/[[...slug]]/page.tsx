@@ -42,6 +42,9 @@ import { Navbar } from '@/components/shared/Navbar';
 import { Footer } from '@/components/shared/Footer';
 import { AdminBar } from '@/components/admin/AdminBar';
 import { LivePreviewListener } from '@/components/shared/LivePreviewListener';
+import ContactFloatingBar from '@/components/shared/ContactFloatingBar';
+import ChatbotWidget from '@/components/shared/ChatbotWidget';
+
 
 //export const revalidate = 3600;
 
@@ -438,7 +441,7 @@ export default async function Page({ params: paramsPromise }: PageParams) {
     }
     const sections = page?.sections || [];
     const displaySlug = childSlug || pageSlug || parentSlug || HOME_SLUG;
-    const bgColor = WHITE_BG_PAGES.includes(displaySlug) ? 'bg-white' : 'bg-lightGrey';
+    const bgColor = WHITE_BG_PAGES.includes(displaySlug) ? 'bg-gradient-to-b from-[#0a0118] to-[#12033a]' : 'bg-gradient-to-b from-[#0a0118] to-[#12033a]';
     const isDark = (
       (parentSlug === 'divisions' && WHITE_NAV_PAGES.includes(parentSlug)) || 
       (parentSlug !== 'solutions' && WHITE_NAV_PAGES.includes(displaySlug))
@@ -447,6 +450,8 @@ export default async function Page({ params: paramsPromise }: PageParams) {
     return (
       <div className={bgColor}>
         <Navbar language={language} isDark={isDark} />
+        <ContactFloatingBar />
+        <ChatbotWidget />
         <main className={cn(bgColor, paddingBottom)}>
           <PageComponent 
             {...(isNews || isCareer || isSpecialNestedRoute 

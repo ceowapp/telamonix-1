@@ -1,4 +1,19 @@
 import { Button } from '@/components/shared/InfoComponents';
+import { FaCode, FaMobile, FaRobot, FaCloud, FaRocket, FaUsers, FaLightbulb, FaShieldAlt, FaClock, FaChartLine, FaHandshake, FaGlobe } from 'react-icons/fa';
+import { 
+  Globe, 
+  Smartphone, 
+  Brain, 
+  BarChart3, 
+  ShoppingBag,
+  Workflow,
+  Cloud,
+  Database,
+  Settings,
+  Server,
+  Monitor
+} from 'lucide-react';
+import { IconType } from 'react-icons';
 
 export const baseMediaUrl = process.env.APP_ENV === 'production' 
   ? process.env.BASE_MEDIA_URL
@@ -27,11 +42,11 @@ export const homeInterHeading = {
 };
 
 export const homeServices = [
-  { title: 'Production House', imageLink: `${baseMediaUrl}/images/pages/shared/share-1.png`, link: '/divisions/production_house' },
-  { title: 'Applied AI Solutions', imageLink: `${baseMediaUrl}/images/pages/shared/share-14.png`, link: '/divisions/fnb' },
-  { title: 'Investment & Incubation', imageLink: `${baseMediaUrl}/images/pages/shared/share-4.png`, link: '/divisions/investment_venture' },
-  { title: 'Smart Robotics', imageLink: `${baseMediaUrl}/images/pages/shared/share-15.png`, link: '/divisions/robotics' },
-  { title: 'Insurtech', imageLink: `${baseMediaUrl}/images/pages/shared/share-2.png`, link: '/divisions/insurtech' },
+  { title: 'Production House', imageLink: `/images/pages/home/app-1.png`, link: '/divisions/production_house' },
+  { title: 'Applied AI Solutions', imageLink: `/images/pages/home/app-2.png`, link: '/divisions/fnb' },
+  { title: 'Investment & Incubation', imageLink: `/images/pages/home/app-3.png`, link: '/divisions/investment_venture' },
+  { title: 'Smart Robotics', imageLink: `/images/pages/home/app-4.png`, link: '/divisions/robotics' },
+  { title: 'Smart Robotics', imageLink: `/images/pages/home/app-5.png`, link: '/divisions/robotics' },
 ];
 
 export const homeSolutionsHeading = {
@@ -2232,3 +2247,411 @@ export const heroText = {
   ],
   ctaButton: "Get In Touch"
 };
+
+export const faqs = [
+  {
+    question: 'What IT services do you offer?',
+    answer: 'We offer a wide range of IT services including web development, mobile app development, cloud services, IT consulting, and cybersecurity solutions.',
+  },
+  {
+    question: 'How do you ensure the security of our data?',
+    answer: 'We implement industry-standard security protocols, regular audits, and encrypted data storage to ensure the highest level of security for your data.',
+  },
+  {
+    question: 'Can you work with our existing systems?',
+    answer: 'Yes, we specialize in integrating new solutions with existing systems to ensure a seamless transition and minimal disruption to your operations.',
+  },
+  {
+    question: 'What is your typical project timeline?',
+    answer: 'Project timelines vary depending on the scope and complexity. We provide detailed timelines during the consultation phase and keep you updated throughout the project.',
+  },
+  {
+    question: 'Do you offer ongoing maintenance and support?',
+    answer: 'Yes, we provide comprehensive ongoing maintenance and support packages to ensure your systems continue operating at peak performance.',
+  },
+  {
+    question: 'How do you handle project scope changes?',
+    answer: 'We have a flexible change management process that allows for scope adjustments with transparent communication and fair pricing.',
+  },
+  {
+    question: 'What technologies do you specialize in?',
+    answer: 'We have expertise in a wide range of technologies including React, Angular, Node.js, Python, AWS, Azure, Google Cloud, and many more cutting-edge platforms.',
+  },
+  {
+    question: 'Do you offer emergency IT support?',
+    answer: 'Yes, our dedicated support team is available 24/7 for emergency situations to ensure minimal downtime for your critical systems.',
+  },
+];
+
+export const testimonials = [
+  { name: 'John Doe', role: 'CEO, Tech Corp', quote: 'Their IT solutions transformed our business operations.', rating: 5, avatar: '/images/global/avatar/john.png' },
+  { name: 'Jane Smith', role: 'CTO, Innovate Inc', quote: 'Exceptional service and cutting-edge technology.', rating: 4, avatar: '/images/global/avatar/jane.png' },
+  { name: 'Mike Johnson', role: 'Founder, StartUp', quote: 'They helped us scale our infrastructure seamlessly.', rating: 5, avatar: '/images/global/avatar/mike.png' },
+  { name: 'Emily Brown', role: 'COO, Global Solutions', quote: 'Their team expertise is unmatched in the industry.', rating: 5, avatar: '/images/global/avatar/emily.png' },
+  { name: 'Alex Lee', role: 'IT Director, Enterprise Co', quote: 'Reliable, innovative, and always ahead of the curve.', rating: 4, avatar: '/images/global/avatar/alex.png' },
+  { name: 'Sarah Chen', role: 'VP of Engineering, TechGiant', quote: 'Their solutions have consistently exceeded our expectations.', rating: 5, avatar: '/images/global/avatar/sarah.png' },
+  { name: 'David Wilson', role: 'CIO, MegaCorp', quote: 'Their cybersecurity measures are top-notch.', rating: 5, avatar: '/images/global/avatar/david.png' },
+  { name: 'Lisa Taylor', role: 'Head of IT, Global Bank', quote: `They've revolutionized our data management systems.`, rating: 4, avatar: '/images/global/avatar/lisa.png' },
+  { name: 'Robert Green', role: 'Tech Lead, E-commerce Giant', quote: 'Their cloud solutions have improved our efficiency tenfold.', rating: 5, avatar: '/images/global/avatar/robert.png' },
+  { name: 'Emma Davis', role: 'Founder, AI Startup', quote: 'Their AI integration services are second to none.', rating: 5, avatar: '/images/global/avatar/emma.png' },
+  { name: 'Chris Wong', role: 'CTO, FinTech Innovators', quote: `They've helped us stay ahead in a competitive market.`, rating: 4, avatar: '/images/global/avatar/chris.png' },
+  { name: 'Olivia Martinez', role: 'VP of Operations, Logistics Co', quote: 'Their IoT solutions have transformed our supply chain.', rating: 5, avatar: '/images/global/avatar/olivia.png' },
+];
+
+export const reasons = [
+  { icon: FaRocket, title: 'Innovative Solutions', description: 'Cutting-edge technology to keep you ahead', color: 'from-blue-500 to-purple-600', colorClass: 'bg-green-box' },
+  { icon: FaUsers, title: 'Expert Team', description: 'Skilled professionals with years of experience', color: 'from-purple-500 to-pink-600', colorClass: 'bg-white-box' },
+  { icon: FaLightbulb, title: 'Customized Approach', description: 'Tailored solutions to fit your unique needs', color: 'from-indigo-500 to-blue-600', colorClass: 'bg-yellow-box' },
+  { icon: FaShieldAlt, title: 'Reliable Security', description: 'Top-notch security measures to protect your data', color: 'from-pink-500 to-rose-600', colorClass: 'bg-blue-box' },
+  { icon: FaClock, title: 'Timely Delivery', description: 'Efficient processes ensuring on-time completion', color: 'from-blue-500 to-indigo-600', colorClass: 'bg-green-box' },
+  { icon: FaChartLine, title: 'Scalable Solutions', description: 'Grow your business with adaptable technologies', color: 'from-purple-500 to-indigo-600', colorClass: 'bg-white-box' },
+  { icon: FaHandshake, title: 'Dedicated Support', description: '24/7 customer service and technical assistance', color: 'from-rose-500 to-pink-600', colorClass: 'bg-yellow-box' },
+  { icon: FaGlobe, title: 'Global Reach', description: 'Serving clients worldwide with localized expertise', color: 'from-blue-500 to-purple-600', colorClass: 'bg-blue-box' },
+];
+
+export interface ServiceTab {
+  key: string;
+  title: string;
+  description: string;
+  features: string[];
+}
+
+export interface ServiceCategory {
+  id: string;
+  title: string;
+  description: string;
+  icon: IconType;
+  gradient: string;
+  tabs: ServiceTab[];
+}
+
+export const servicesData: ServiceCategory[] = [
+  {
+    id: 'web',
+    title: 'Web Development',
+    description: 'We create modern, responsive, and scalable web applications using cutting-edge technologies and best practices.',
+    icon: FaCode,
+    gradient: 'from-blue-500 to-purple-600',
+    tabs: [
+      {
+        key: 'frontend',
+        title: 'Frontend Development',
+        description: 'We build beautiful and responsive user interfaces using modern frameworks and libraries.',
+        features: [
+          'React.js and Next.js development',
+          'Responsive design implementation',
+          'State management solutions',
+          'Performance optimization',
+          'Cross-browser compatibility',
+          'Accessibility compliance'
+        ]
+      },
+      {
+        key: 'backend',
+        title: 'Backend Development',
+        description: 'We develop robust and scalable server-side applications with secure APIs and efficient databases.',
+        features: [
+          'Node.js and Express.js',
+          'RESTful API development',
+          'Database design and optimization',
+          'Authentication and authorization',
+          'Server deployment and scaling',
+          'API documentation'
+        ]
+      },
+      {
+        key: 'fullstack',
+        title: 'Full Stack Solutions',
+        description: 'We provide end-to-end web development solutions that seamlessly integrate frontend and backend technologies.',
+        features: [
+          'Full stack architecture design',
+          'Microservices implementation',
+          'Real-time applications',
+          'Cloud integration',
+          'DevOps practices',
+          'Continuous integration/deployment'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'mobile',
+    title: 'Mobile Development',
+    description: 'We develop native and cross-platform mobile applications that deliver exceptional user experiences.',
+    icon: FaMobile,
+    gradient: 'from-green-500 to-teal-600',
+    tabs: [
+      {
+        key: 'native',
+        title: 'Native Development',
+        description: 'We create high-performance native applications for iOS and Android platforms.',
+        features: [
+          'iOS development with Swift',
+          'Android development with Kotlin',
+          'Native UI/UX design',
+          'Platform-specific features',
+          'App store optimization',
+          'Performance optimization'
+        ]
+      },
+      {
+        key: 'cross',
+        title: 'Cross-Platform Development',
+        description: 'We build cross-platform applications that work seamlessly across multiple devices and platforms.',
+        features: [
+          'React Native development',
+          'Flutter applications',
+          'Cross-platform UI/UX',
+          'Code reusability',
+          'Rapid development',
+          'Cost-effective solutions'
+        ]
+      },
+      {
+        key: 'hybrid',
+        title: 'Hybrid Applications',
+        description: 'We develop hybrid applications that combine the best of web and native technologies.',
+        features: [
+          'Ionic framework',
+          'Cordova/PhoneGap',
+          'WebView optimization',
+          'Native plugin integration',
+          'Offline capabilities',
+          'Progressive Web Apps'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'robotics',
+    title: 'Robotics Development',
+    description: 'Our robotics development services help businesses automate physical tasks and processes through custom robotics solutions.',
+    icon: FaRobot,
+    gradient: 'from-green-500 to-teal-600',
+    tabs: [
+      {
+        key: 'control',
+        title: 'Robotics Control Systems',
+        description: 'We develop advanced robotics control systems that enable precise, reliable, and efficient operation of robotic systems.',
+        features: [
+          'ROS (Robot Operating System) implementation',
+          'Motion planning and trajectory optimization',
+          'Real-time control systems',
+          'Sensor fusion and state estimation',
+          'Multi-robot coordination',
+          'Safety systems and emergency protocols'
+        ]
+      },
+      {
+        key: 'hardware',
+        title: 'Hardware Integration',
+        description: 'We integrate various hardware components to create complete robotic solutions tailored to your specific needs.',
+        features: [
+          'Arduino and Raspberry Pi integration',
+          'Motor control and actuation systems',
+          'Sensor integration (vision, force, proximity)',
+          'Custom PCB design and manufacturing',
+          '3D printing and rapid prototyping',
+          'Industrial automation equipment integration'
+        ]
+      },
+      {
+        key: 'ai',
+        title: 'AI & Robotics',
+        description: 'We combine artificial intelligence with robotics to create intelligent, adaptive systems that can learn and improve over time.',
+        features: [
+          'Computer vision for object recognition',
+          'Machine learning for motion control',
+          'Reinforcement learning for task optimization',
+          'Natural language processing for human-robot interaction',
+          'Predictive maintenance and fault detection',
+          'Autonomous navigation and path planning'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'cloud',
+    title: 'Cloud Solutions',
+    description: 'We provide comprehensive cloud computing solutions to help businesses scale and optimize their operations.',
+    icon: FaCloud,
+    gradient: 'from-blue-500 to-indigo-600',
+    tabs: [
+      {
+        key: 'infrastructure',
+        title: 'Cloud Infrastructure',
+        description: 'We design and implement scalable cloud infrastructure solutions for businesses of all sizes.',
+        features: [
+          'AWS, Azure, and GCP solutions',
+          'Infrastructure as Code (IaC)',
+          'Container orchestration',
+          'Serverless architecture',
+          'Cloud migration services',
+          'Disaster recovery planning'
+        ]
+      },
+      {
+        key: 'devops',
+        title: 'DevOps & CI/CD',
+        description: 'We implement DevOps practices and continuous integration/deployment pipelines for efficient software delivery.',
+        features: [
+          'CI/CD pipeline setup',
+          'Automated testing',
+          'Infrastructure automation',
+          'Monitoring and logging',
+          'Security integration',
+          'Performance optimization'
+        ]
+      },
+      {
+        key: 'security',
+        title: 'Cloud Security',
+        description: 'We ensure your cloud infrastructure and applications are secure and compliant with industry standards.',
+        features: [
+          'Security architecture design',
+          'Identity and access management',
+          'Data encryption',
+          'Compliance monitoring',
+          'Threat detection',
+          'Security automation'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'security',
+    title: 'Cybersecurity',
+    description: 'We provide comprehensive cybersecurity solutions to protect your digital assets and ensure business continuity.',
+    icon: FaShieldAlt,
+    gradient: 'from-red-500 to-orange-600',
+    tabs: [
+      {
+        key: 'assessment',
+        title: 'Security Assessment',
+        description: 'We conduct thorough security assessments to identify vulnerabilities and provide remediation strategies.',
+        features: [
+          'Vulnerability assessment',
+          'Penetration testing',
+          'Security audits',
+          'Risk analysis',
+          'Compliance checks',
+          'Security recommendations'
+        ]
+      },
+      {
+        key: 'protection',
+        title: 'Threat Protection',
+        description: 'We implement advanced security measures to protect against various cyber threats and attacks.',
+        features: [
+          'Firewall implementation',
+          'Intrusion detection/prevention',
+          'Malware protection',
+          'DDoS mitigation',
+          'Endpoint security',
+          'Network security'
+        ]
+      },
+      {
+        key: 'compliance',
+        title: 'Compliance & Governance',
+        description: 'We help organizations meet regulatory requirements and implement security governance frameworks.',
+        features: [
+          'GDPR compliance',
+          'HIPAA compliance',
+          'ISO 27001 implementation',
+          'Security policies',
+          'Incident response planning',
+          'Security awareness training'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'analytics',
+    title: 'Data Analytics',
+    description: 'We help businesses make data-driven decisions through advanced analytics and business intelligence solutions.',
+    icon: FaChartLine,
+    gradient: 'from-purple-500 to-pink-600',
+    tabs: [
+      {
+        key: 'business',
+        title: 'Business Intelligence',
+        description: 'We transform raw data into actionable insights to drive business growth and efficiency.',
+        features: [
+          'Data visualization',
+          'Dashboard development',
+          'KPI tracking',
+          'Performance analytics',
+          'Trend analysis',
+          'Predictive modeling'
+        ]
+      },
+      {
+        key: 'bigdata',
+        title: 'Big Data Solutions',
+        description: 'We help organizations process and analyze large volumes of data to extract valuable insights.',
+        features: [
+          'Data warehousing',
+          'ETL processes',
+          'Real-time analytics',
+          'Data mining',
+          'Machine learning integration',
+          'Scalable data processing'
+        ]
+      },
+      {
+        key: 'ai',
+        title: 'AI & Machine Learning',
+        description: 'We implement AI and machine learning solutions to automate processes and enhance decision-making.',
+        features: [
+          'Predictive analytics',
+          'Natural language processing',
+          'Computer vision',
+          'Recommendation systems',
+          'Anomaly detection',
+          'Automated decision making'
+        ]
+      }
+    ]
+  }
+];
+
+export const categories = ['Technologies', 'Industries'];
+
+export const technologies = [
+  "Web", "Mobile", "Application", "Data Science", "AI", "Cloud Services", 
+  "Blockchain", "Computer Vision", "AR/VR", "IoT", "Cybersecurity", 
+  "DevOps", "UI/UX", "3D Modeling", "Game Development"
+];
+
+export const industries = [
+  "IT", "Construction", "Hospitality", "E-commerce", "SaaS", "Healthcare", 
+  "Finance", "Education", "Manufacturing", "Retail", "Entertainment", 
+  "Real Estate", "Automotive", "Energy", "Agriculture"
+];
+
+export const projects = [
+  { title: 'WApp Platform', image: '/images/global/portfolio/product-1.png', link: 'https://wapp-pi.vercel.app', tags: ['Web', 'SaaS', 'UI/UX', 'Fullstack'] },
+  { title: 'Doc2Product', image: '/images/global/portfolio/product-shopify-1.png', link: 'https://youtu.be/sLqAy2-sGfY?si=-YDeN5f0cUBvWwja', tags: ['Shopify', 'SaaS', 'UI/UX', 'Fullstack', 'AI', 'SEO'] },
+  { title: 'Optiwrite', image: '/images/global/portfolio/product-shopify-2.png', link: 'https://youtu.be/T30vhzfHLRA?si=ye0Hs3CPP1tybWW3', tags: ['Shopify', 'SaaS', 'UI/UX', 'Fullstack', 'AI', 'SEO'] },
+  { title: 'Jewelry Try-on', image: '/images/global/portfolio/product-2.png', link: 'http://54.253.104.12:8000/index-ai.html/', tags: ['Web', 'Application', 'IT', 'AI', 'AR/VR', 'Retail'] },
+  { title: '3D Generator', image: '/images/global/portfolio/product-3.png', link: 'http://54.253.104.12:8000/index-3d.html/', tags: ['Mobile', 'IT', 'AI', '3D Modeling'] },
+  { title: 'Face Animation', image: '/images/global/portfolio/product-4.png', link: 'http://54.253.104.12:8000/faceAnimation.html/', tags: ['Web', 'IT', 'Computer Vision', 'Entertainment'] },
+  { title: 'ARVR Application', image: '/images/global/portfolio/product-5.png', link: 'http://54.253.104.12:8000/index-txt.html/', tags: ['AR/VR', 'IT', 'Mobile'] },
+  { title: 'Stereo VR', image: '/images/global/portfolio/product-6.png', link: 'http://54.253.104.12:8000/stereo-vr.html/', tags: ['AR/VR', 'IT', 'Entertainment'] },
+  { title: 'Immersive VR', image: '/images/global/portfolio/product-7.png', link: 'http://54.253.104.12:8000/immersive-vr.html/', tags: ['AR/VR', 'IT', 'Education'] },
+  { title: 'iOS Helper', image: '/images/global/portfolio/product-8.png', link: 'http://54.253.104.12:8000/iosApp.html/', tags: ['Mobile', 'IT', 'iOS'] },
+  { title: 'Medical Diagnosis App', image: '/images/global/portfolio/product-9.png', link: 'http://54.253.104.12:8000/index-med.html/', tags: ['Cloud Services', 'IT', 'Healthcare', 'AI'] },
+  { title: 'QR Application', image: '/images/global/portfolio/product-10.png', link: 'http://54.253.104.12:8000/index-qr.html/', tags: ['AI', 'Data Science', 'IT', 'Mobile'] },
+  { title: 'Game Concept', image: '/images/global/portfolio/product-11.png', link: 'http://54.253.104.12:8000/gallery.html/', tags: ['Game Development', 'Entertainment', '3D Modeling'] },
+  { title: 'Construction Showcase', image: '/images/global/portfolio/product-12.png', link: 'http://54.253.104.12:8000/verge3d.html/', tags: ['3D Modeling', 'Construction', 'AR/VR'] },
+  { title: 'ThreeJS Showcase', image: '/images/global/portfolio/product-13.png', link: 'http://54.253.104.12:8000/display3d.html/', tags: ['Web', '3D Modeling', 'UI/UX'] },
+  { title: 'Text Animation', image: '/images/global/portfolio/product-14.png', link: 'http://54.253.104.12:8000/textEffect.html/', tags: ['Web', 'UI/UX', 'Entertainment'] },
+  { title: 'Lego 3D', image: '/images/global/portfolio/product-15.png', link: 'http://54.253.104.12:8000/displayLego.html/', tags: ['3D Modeling', 'Game Development', 'Entertainment'] },
+  { title: 'Android Helper', image: '/images/global/portfolio/product-16.png', link: 'http://54.253.104.12:8000/androidApp.html/', tags: ['Mobile', 'IT', 'Android'] },
+  { title: 'Robotics Simulator', image: '/images/global/portfolio/product-17.png', link: 'http://54.253.104.12:8000/robotics.html/', tags: ['AI', 'IoT', 'Manufacturing'] },
+  { title: 'Construction Management', image: '/images/global/portfolio/product-18.png', link: 'https://youtu.be/MQCPO48Wkak?si=EHsmTUvJ7F8TOsOF/', tags: ['Construction', 'Cloud Services', 'Mobile'] },
+  { title: 'Data Visualization', image: '/images/global/portfolio/product-19.png', link: 'https://youtu.be/KOwu8sML2dQ?si=RmUw585frciWMlxk', tags: ['Data Science', 'UI/UX', 'Finance'] },
+];
+
+

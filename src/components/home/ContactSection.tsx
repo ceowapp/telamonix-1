@@ -1320,16 +1320,19 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-gray-900 to-gray-800">
+    <section id="contact" className="py-24 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 relative">
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#0945EB] to-transparent opacity-50"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#0945EB] to-transparent opacity-50"></div>
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center mb-12 text-white">Contact Us</h2>
-        <div className="flex flex-col xl:flex-row gap-8">
+        <h2 className="text-5xl sm:text-6xl font-bold text-center pb-16">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500">
+            Get in Touch
+          </span>
+        </h2>
+        <div className="flex flex-col xl:flex-row gap-12">
           <motion.div 
             ref={containerRef} 
-            className="glass-block w-full xl:w-1/2 hidden xl:block" 
-            style={{ 
-              height: '100vh',
-            }}
+            className="glass-block w-full xl:w-1/2 hidden xl:block rounded-2xl overflow-hidden" 
             onHoverStart={() => setLeftHovered(true)}
             onHoverEnd={() => setLeftHovered(false)}
           ></motion.div>
@@ -1337,70 +1340,72 @@ const ContactSection = () => {
             className="w-full xl:w-1/2"
             style={{ 
               background: leftHovered 
-                ? 'linear-gradient(135deg, #1a202c 0%, #2d3748 100%)' 
-                : 'linear-gradient(135deg, #2d3748 0%, #4a5568 100%)',
-              transition: 'background 0.3s ease',
-              padding: '2rem',
-              borderRadius: '0.5rem'
+                ? 'linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(31, 41, 55, 0.95) 100%)' 
+                : 'linear-gradient(135deg, rgba(31, 41, 55, 0.95) 0%, rgba(17, 24, 39, 0.95) 100%)',
+              transition: 'all 0.3s ease',
+              padding: '2.5rem',
+              borderRadius: '1.5rem',
+              boxShadow: '0 0 30px rgba(0, 0, 0, 0.2)',
+              backdropFilter: 'blur(10px)',
             }}
             onHoverStart={() => setRightHovered(true)}
             onHoverEnd={() => setRightHovered(false)}
           >
             <motion.form
-              className="grid grid-cols-1 gap-6"
+              className="grid grid-cols-1 gap-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               onSubmit={handleSubmit(onSubmit)}
             >
               <div>
-                <label htmlFor="name" className="block text-gray-300 font-semibold mb-2">Name</label>
+                <label htmlFor="name" className="block text-gray-200 font-medium mb-2 text-lg">Name</label>
                 <input 
                   {...register('name')}
                   placeholder="Enter your name"
                   type="text" 
                   id="name" 
-                  className="w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500" 
+                  className="w-full px-4 py-3 bg-gray-800/50 text-white border border-gray-700 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300" 
                 />
-                {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
+                {errors.name && <p className="text-red-400 text-sm mt-2">{errors.name.message}</p>}
               </div>
               <div>
-                <label htmlFor="email" className="block text-gray-300 font-semibold mb-2">Email</label>
+                <label htmlFor="email" className="block text-gray-200 font-medium mb-2 text-lg">Email</label>
                 <input 
                   {...register('email')}
                   type="email" 
                   id="email" 
                   placeholder="Enter your work email"
-                  className="w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500" 
+                  className="w-full px-4 py-3 bg-gray-800/50 text-white border border-gray-700 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300" 
                 />
-                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+                {errors.email && <p className="text-red-400 text-sm mt-2">{errors.email.message}</p>}
               </div>
               <div>
-                <label htmlFor="socialMediaLink" className="block text-gray-300 font-semibold mb-2">Social Media Link (Optional)</label>
+                <label htmlFor="socialMediaLink" className="block text-gray-200 font-medium mb-2 text-lg">Social Media Link (Optional)</label>
                 <input 
                   {...register('socialMediaLink')}
                   type="text" 
                   id="socialMediaLink" 
                   placeholder="Link to your LinkedIn, Twitter, etc... (optional)"
-                  className="w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500" 
+                  className="w-full px-4 py-3 bg-gray-800/50 text-white border border-gray-700 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300" 
                 />
               </div>
               <div>
-                <label htmlFor="message" className="block text-gray-300 font-semibold mb-2">Message</label>
+                <label htmlFor="message" className="block text-gray-200 font-medium mb-2 text-lg">Message</label>
                 <textarea 
                   {...register('message')}
                   id="message" 
-                  rows="4" 
+                  rows={4}
                   placeholder="Brief description of your project requirements, project timeline, project budget, etc..."
-                  className="w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500" 
+                  className="w-full px-4 py-3 bg-gray-800/50 text-white border border-gray-700 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 resize-none" 
                 ></textarea>
-                {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>}
+                {errors.message && <p className="text-red-400 text-sm mt-2">{errors.message.message}</p>}
               </div>
               <motion.button
                 type="submit"
-                className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-cyan-600 transition-all duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 Send Message
               </motion.button>

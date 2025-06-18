@@ -1,3 +1,4 @@
+"use client"
 import React, { forwardRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -48,16 +49,15 @@ const Navigation = forwardRef<HTMLDivElement, NavigationProps>(
     const sections: Section[] = [
       { id: 1, name: 'Hero', href: '#hero', icon: <Home size={18} /> },
       { id: 2, name: 'Services', href: '#services', icon: <Briefcase size={18} /> },
-      { id: 3, name: 'Techstack', href: '#techstack', icon: <Layers size={18} /> },
-      { id: 4, name: 'Testimonials', href: '#testimonials', icon: <Star size={18} /> },
-      { id: 5, name: 'Why Choose Us', href: '#whychooseus', icon: <ThumbsUp size={18} /> },
-      { id: 6, name: 'Process', href: '#process', icon: <GitBranch size={18} /> },
-      { id: 7, name: 'Portfolio', href: '#portfolio', icon: <Folder size={18} /> },
-      { id: 8, name: 'Call to Action', href: '#calltoaction', icon: <PhoneCall size={18} /> },
-      { id: 9, name: 'FAQ', href: '#faq', icon: <HelpCircle size={18} /> },
-      { id: 10, name: 'Contact', href: '#contact', icon: <Mail size={18} /> },
-      { id: 11, name: 'Blog', href: '#blog', icon: <BookText size={18} /> },
-      { id: 12, name: 'Footer', href: '#footer', icon: <ListEnd size={18} /> },
+      { id: 3, name: 'Technology', href: '#technology', icon: <Layers size={18} /> },
+      { id: 4, name: 'Why Choose Us', href: '#whychooseus', icon: <ThumbsUp size={18} /> },
+      { id: 5, name: 'Testimonials', href: '#testimonials', icon: <Star size={18} /> },
+      { id: 6, name: 'Portfolio', href: '#portfolio', icon: <GitBranch size={18} /> },
+      { id: 7, name: 'Call to Action', href: '#calltoaction', icon: <PhoneCall size={18} /> },
+      { id: 8, name: 'FAQ', href: '#faq', icon: <HelpCircle size={18} /> },
+      { id: 9, name: 'Contact', href: '#contact', icon: <Mail size={18} /> },
+      { id: 10, name: 'Blog', href: '#blog', icon: <BookText size={18} /> },
+      { id: 11, name: 'Footer', href: '#footer', icon: <ListEnd size={18} /> },
     ];
 
     const handleNavClick = (sectionId: number) => {

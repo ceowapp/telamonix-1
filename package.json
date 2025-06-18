@@ -1,7 +1,7 @@
 {
-  "name": "y",
+  "name": "telamonix",
   "version": "1.0.0",
-  "description": "Website template for Payload",
+  "description": "Telamonix Website",
   "license": "MIT",
   "type": "module",
   "scripts": {
@@ -72,6 +72,7 @@
     "nodemailer": "^6.10.0",
     "payload": "latest",
     "payload-admin-bar": "^1.0.7",
+    "postprocessing": "^6.37.3",
     "prism-react-renderer": "^2.3.1",
     "react": "19.0.0",
     "react-datepicker": "^8.2.1",

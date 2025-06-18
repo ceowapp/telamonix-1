@@ -4,27 +4,26 @@ import React, { Fragment, useRef, useCallback, useState, useEffect } from "react
 import dynamic from "next/dynamic";
 import type { Page } from '@/payload-types'
 import HeroSection from "./HeroSection";
+import InterSection from "./InterSection";
 import ServicesSection from './ServicesSection';
-import TechnologySection from './TechnologySection';
 import TestimonialsSection from "./TestimonialsSection";
 import WhyChooseUsSection from "./WhyChooseUsSection";
-import ProcessSection from "./ProcessSection";
 import PortfolioSection from "./PortfolioSection";
 import CallToActionSection from "./CallToActionSection";
 import FAQSection from "./FAQSection";
 import ContactSection from "./ContactSection";
 import NewsSection from "./NewsSection";
-import { HTMLRenderer } from '../shared/HTMLRenderer';
+import TechstackSection from './TechstackSection';
 import AnimatedSection from '../shared/AnimatedSection';
 import Navigation from "./Navigation";
 
 const pageComponents: Record<string, React.ComponentType<any>> = {
   hero: HeroSection,
+  inter: InterSection,
   service: ServicesSection,
-  technology: TechnologySection,
+  technology: TechstackSection,
   testimonial: TestimonialsSection,
   whychooseus: WhyChooseUsSection,
-  process: ProcessSection,
   portfolio: PortfolioSection,
   calltoaction: CallToActionSection,
   faq: FAQSection,
@@ -33,11 +32,10 @@ const pageComponents: Record<string, React.ComponentType<any>> = {
 };
 
 const sectionAnimations: Record<string, string> = {
-  hero: "fadeIn",
+  inter: "fadeIn",
   service: "slideFromLeft",
   testimonial: "scale",
   whychooseus: "slideFromBottom",
-  process: "scale",
   portfolio: "fadeIn",
   calltoaction: "slideFromRight",
   faq: "slideFromTop",

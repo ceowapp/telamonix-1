@@ -7,7 +7,7 @@ import { Disclosure, Transition } from "@headlessui/react";
 import { ModeToggle } from "../ModeToggle";
 import { useScrollTop } from "@/hooks/useScrollTop";
 import CompanyLogo from "../CompanyLogo";
-import { ProductMenu } from "./menu/ProductMenu";
+import { DeveloperMenu } from "./menu/DeveloperMenu";
 import { SolutionMenu } from "./menu/SolutionMenu";
 import { ResourceMenu } from "./menu/ResourceMenu";
 import { MenuWrapper } from "./menu/MenuWrapper";
@@ -131,7 +131,7 @@ return (
   <nav 
     role="navigation" 
     onMouseLeave={() => setHovering(null)}
-    className="z-[55] nav-header dark:shadow-blue bg-transparent fixed top-0 items-center self-center flex w-full max-w-full justify-center gap-5 my-auto tablet:block"
+    className="z-[55] nav-header dark:shadow-blue bg-transparent fixed top-0 items-center self-center flex w-full max-w-full justify-center gap-5 my-auto maxtabletmd1:block"
   >
     <div className="flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-16 items-center">
       <div className="flex-shrink-0 absolute w-12 h-12">
@@ -139,35 +139,35 @@ return (
           <CompanyLogo imageUrl={logoPath} language={language} />
         </div>
       </div>
-      <div className="flex w-full relative pl-24 tablet:hidden justify-between items-center">
+      <div className="flex w-full relative pl-24 maxtabletmd1:hidden justify-between items-center">
         <MenuLink
           index={0}
           linkRef={el => itemRefs.current[0] = el}
           focusMenu={focusMenu}
-          href={"/products"}
+          href={"/solutions"}
           isActive={hovering === 0}
         >
-          Products
+          Solutions
         </MenuLink>
         <MenuLink
           index={1}
           linkRef={el => itemRefs.current[1] = el}
           focusMenu={focusMenu}
-          href={"/solutions"}
+          href={"/contact"}
           isActive={hovering === 1}
         >
-          Solutions
+          Developers
         </MenuLink>
          <MenuLink
           index={2}
           linkRef={el => itemRefs.current[2] = el}
           focusMenu={focusMenu}
-          href={"/resources"}
+          href={"/about"}
           isActive={hovering === 2}
         >
           Resources
         </MenuLink>
-        <Link href="/blogs" className="text-white text-center text-base font-medium leading-6 tracking-wide whitespace-nowrap transition-all duration-200">
+        <Link href="/news" className="text-white text-center text-base font-medium leading-6 tracking-wide whitespace-nowrap transition-all duration-200">
           News
         </Link>
         <div className="flex items-center">
@@ -179,10 +179,10 @@ return (
           <div className={clsx(hovering !== null ? "transition-opacity duration-200": "opacity-0 pointer-events-none")}>
             <div style={{ height: popoverHeight || 500, width: popoverWidth || 1200 }} className="bg-transparent max-h-[600px] overflow-y-auto transform-gpu rounded shadow-lg relative overflow-x-hidden transition-all duration-200">
               <MenuWrapper className="w-[72rem]" index={0} hovering={hovering}>
-                <ProductMenu ref={ref => refs.current[0] = ref} />
+                <SolutionMenu ref={ref => refs.current[0] = ref} />
               </MenuWrapper>
               <MenuWrapper className="w-[36rem]" index={1} hovering={hovering}>
-                <SolutionMenu ref={ref => refs.current[1] = ref} />
+                <DeveloperMenu ref={ref => refs.current[1] = ref} />
               </MenuWrapper>
               <MenuWrapper className="w-[36rem]" index={2} hovering={hovering}>
                 <ResourceMenu ref={ref => refs.current[2] = ref} />
@@ -191,7 +191,7 @@ return (
           </div>
         </div>   
       )}     
-      <div className="w-full justify-end -mr-2 gap-x-4 hidden tablet:flex">
+      <div className="w-full justify-end -mr-2 gap-x-4 hidden maxtabletmd1:flex">
           <LanguageSelector currentLanguage={language} isDark={isDark} />
         <button onClick={toggleNavbar} type="button" className="inline-flex items-center justify-center">
           <svg className={`${isOpen ? 'hidden' : 'block'} h-8 w-8 p-1 text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -203,7 +203,7 @@ return (
         </button>
       </div>
     </div>
-    <div className={`${isOpen ? 'tablet:block' : 'hidden'} hidden relative h-screen w-full`}>
+    <div className={`${isOpen ? 'maxtabletmd1:block' : 'hidden'} hidden relative h-screen w-full`}>
       <div className="px-2 pt-2 pb-3 sm:px-3">
         <Link href="/blogs" className="dark:text-white text-black text-gray-800 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium transition-all duration-200">
           News

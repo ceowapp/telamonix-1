@@ -29,10 +29,12 @@ const HeaderFallback: React.FC<HeroSectionProps> = React.memo(({
 }) => {  
   return (
   <div className="w-full max-w-3xl mx-auto mb-6 sm:mb-8 md:mb-12 text-center px-4">
-    <h1 className="text-display-regular-black">
-      {data?.title || homeNewsHeader?.title}
-    </h1>
-    <p className="mt-2 sm:mt-3 text-body-regular-black max-w-2xl mx-auto">
+    <h2 className="text-5xl sm:text-6xl font-bold text-white mb-6">
+      <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0945EB] via-[#67D1FF] to-[#0945EB]">
+        Our Blogs 
+      </span>
+    </h2>
+    <p className="text-xl text-[#E2E8F0] max-w-3xl mx-auto">
       {data?.description || homeNewsHeader?.description}
     </p>
   </div>
@@ -75,7 +77,7 @@ const NewsSection: React.FC<NewsSectionProps> = ({
     return <HTMLRenderer data={data?.codeField} />;
   }
   return (
-    <section className="w-full pt-6 pb-20 sm:pb-20 md:pb-20 lg:pb-24 xl:pb-32">
+    <section className="w-full py-20 sm:pb-20 md:pb-20 lg:pb-24 xl:pb-32">
       <div className="w-full mx-auto px-4 flex flex-col items-center px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
         {checkValidHTML(headerBlock?.codeField) ? (
           <HTMLRenderer data={headerBlock.codeField} />

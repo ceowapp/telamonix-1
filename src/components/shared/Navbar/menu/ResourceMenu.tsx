@@ -2,19 +2,22 @@
 
 import React, { forwardRef, useRef, useEffect } from "react";
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const MenuLink = forwardRef(({ type, href, imageSrc, title, description, beta }, ref) => {
   const isMainLink = type === "main";
   return (
-    <a
+    <motion.a
       ref={ref}
       href={href}
-      className="text-white items-center py-5 px-5 no-underline inline-flex max-w-full hover:bg-gray-800"
+      className="text-white items-center py-4 px-4 no-underline inline-flex max-w-full hover:bg-purple-800 rounded-lg transition-all duration-300 ease-in-out"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
     >
       {isMainLink && (
-        <div className="h-57 min-w-57 border-1 border-solid border-white border-opacity-10 bg-gray-900 rounded-12 justify-center items-center flex">
+        <div className="h-16 w-16 border border-white border-opacity-20 bg-purple-700 rounded-lg flex justify-center items-center shadow-lg">
           <Image
-            className="max-w-full align-middle inline-block"
+            className="max-w-full align-middle"
             src={imageSrc}
             loading="lazy"
             width={35}
@@ -24,19 +27,18 @@ const MenuLink = forwardRef(({ type, href, imageSrc, title, description, beta },
         </div>
       )}
 
-      <div className={`dropdown-link-item-right ml-3 ${isMainLink ? "col-span-2" : ""}`}>
+      <div className={`ml-4 flex-grow ${isMainLink ? "col-span-2" : ""}`}>
+        <div className="flex items-center gap-2 text-sm font-semibold">
+          {title}
+          {beta && (
+            <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded-full">BETA</span>
+          )}
+        </div>
         {isMainLink && (
-          <>
-            <div className="gap-x-2 gap-y-2 items-center text-xs font-semibold flex">
-              {title} {beta && <span className="beta">BETA</span>}
-            </div>
-            <div className="opacity-80 mt-6 text-xs">{description}</div>
-          </>
+          <p className="opacity-80 mt-1 text-xs">{description}</p>
         )}
-
-        {!isMainLink && <div className="ml-3 col-span-2 text-xs font-semibold">{title}</div>}
       </div>
-    </a>
+    </motion.a>
   );
 });
 
@@ -62,66 +64,37 @@ export const ResourceMenu = forwardRef<HTMLDivElement>((props, ref) => {
     }
   }
 
-  const capabilities = [
+   const capabilities = [
     [
       {
-        title: "Products",
+        title: "About",
         items: [
           {
-            href: "/additionals",
-            imageSrc: "/images/global/navbar/connect.png",
-            title: "Unified Feedback Repository",
-            description: "Eliminate data silos to get a unified source of truth",
-            beta: true,
+            href: "/en/about",
+            imageSrc: "/images/global/navbar/business.svg",
+            title: "Who We Are",
+            description: "Learn more about our mission, values, and journey.",
+            beta: false,
             type: "main"
           },
           {
-            href: "/additionals",
-            imageSrc: "/images/global/navbar/square.png",
-            title: "Integrations",
-            description: "Connect to any app containing customer feedback",
+            href: "/en/careers",
+            imageSrc: "/images/global/navbar/career.svg",
+            title: "Work With Us",
+            description: "Join our team and help build the future of technology.",
             beta: false,
             type: "main"
           }
         ]
       },
       {
-        title: "Products",
+        title: "Assistance",
         items: [
           {
-            href: "/additionals",
-            imageSrc: "/images/global/navbar/connect.png",
-            title: "Unified Feedback Repository",
-            description: "Eliminate data silos to get a unified source of truth",
-            beta: true,
-            type: "main"
-          },
-          {
-            href: "/blogs",
-            imageSrc: "/images/global/navbar/square.png",
-            title: "Integrations",
-            description: "Connect to any app containing customer feedback",
-            beta: false,
-            type: "main"
-          }
-        ]
-      },
-      {
-        title: "Products",
-        items: [
-          {
-            href: "/additionals",
-            imageSrc: "/images/global/navbar/connect.png",
-            title: "Unified Feedback Repository",
-            description: "Eliminate data silos to get a unified source of truth",
-            beta: true,
-            type: "main"
-          },
-          {
-            href: "/additionals",
-            imageSrc: "/images/global/navbar/square.png",
-            title: "Integrations",
-            description: "Connect to any app containing customer feedback",
+            href: "/en/contact",
+            imageSrc: "/images/global/navbar/support.svg",
+            title: "Contact & Help",
+            description: "Start a project, ask questions, or request a consultation.",
             beta: false,
             type: "main"
           }
@@ -130,52 +103,26 @@ export const ResourceMenu = forwardRef<HTMLDivElement>((props, ref) => {
     ],
     [
       {
-        title: "Technologies",
+        title: "Innovation",
         items: [
           {
-            href: "/additionals",
-            imageSrc: "/images/global/navbar/square.png",
-            title: "Feedback Tracking",
-            description: "Track feedback progress and outcomes",
+            href: "/en/technology",
+            imageSrc: "/images/global/navbar/technology-1.svg",
+            title: "Tech Stack",
+            description: "Discover the tools and technologies powering our solutions.",
             beta: false,
             type: "main"
           }
         ]
       },
       {
-        title: "Technologies",
+        title: "Offerings",
         items: [
           {
-            href: "/blogs",
-            imageSrc: "/images/global/navbar/square.png",
-            title: "Feedback Tracking",
-            description: "Track feedback progress and outcomes",
-            beta: false,
-            type: "main"
-          }
-        ]
-      },
-      {
-        title: "Technologies",
-        items: [
-          {
-            href: "/additionals",
-            imageSrc: "/images/global/navbar/square.png",
-            title: "Feedback Tracking",
-            description: "Track feedback progress and outcomes",
-            beta: false,
-            type: "main"
-          }
-        ]
-      },
-      {
-        title: "Technologies",
-        items: [
-          {
-            href: "/additionals",
-            imageSrc: "/images/global/navbar/square.png",
-            title: "Feedback Tracking",
-            description: "Track feedback progress and outcomes",
+            href: "/en/solutions",
+            imageSrc: "/images/global/navbar/solution-1.svg",
+            title: "Service Portfolio",
+            description: "Comprehensive services from web and mobile to cloud and AI.",
             beta: false,
             type: "main"
           }
@@ -183,6 +130,7 @@ export const ResourceMenu = forwardRef<HTMLDivElement>((props, ref) => {
       }
     ]
   ];
+
   return (
     <nav
       ref={ref}
@@ -196,7 +144,7 @@ export const ResourceMenu = forwardRef<HTMLDivElement>((props, ref) => {
             <div key={index} className="flex flex-col h-full">
               {section.map((subsection, subIndex) => (
                 <React.Fragment key={`${index}-${subIndex}`}>
-                  <h1 className="text-start p-4 font-bold text-lg">{subsection.title}</h1>
+                  <h1 className="text-start p-4 font-bold text-lg text-white">{subsection.title}</h1>
                   {subsection.items.map((item, itemIndex) => (
                     <React.Fragment key={itemIndex}>
                       <MenuLink

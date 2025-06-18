@@ -20,8 +20,8 @@ export const generateMeta = async (args: {
   const ogImage = getImageURL(doc?.meta?.image)
   const title = doc?.meta?.title
     ? doc?.meta?.title + ' | Innovative Solutions for Modern Businesses'
-    : 'Naiscorp | Innovative Solutions for Modern Businesses'
-  const siteName = 'Naiscorp'
+    : 'Telamonix | Innovative Solutions for Modern Businesses'
+  const siteName = 'Telamonix'
   const baseUrl = getServerSideURL()
   const isHomePage = Array.isArray(doc?.slug) ? doc?.slug.includes('home') : doc?.slug === 'home'
   const slugPath = isHomePage 
@@ -29,7 +29,7 @@ export const generateMeta = async (args: {
     : `${Array.isArray(doc?.slug) ? doc?.slug.join('/') : doc?.slug || ''}`
   const canonicalUrl = doc?.meta?.canonical || `${baseUrl}/${slugPath}`
   const twitterCard = doc?.meta?.twitter?.card || 'summary_large_image'
-  const twitterSite = doc?.meta?.twitter?.site || '@naiscorp'
+  const twitterSite = doc?.meta?.twitter?.site || '@telamonix'
   const twitterCreator = doc?.meta?.twitter?.creator || twitterSite
   const additionalMetaTags = doc?.meta?.additionalMetaTags?.map(tag => ({
     name: tag.name,
@@ -38,7 +38,7 @@ export const generateMeta = async (args: {
   return {
     title,
     description: doc?.meta?.description || '',
-    keywords: doc?.meta?.keywords || 'Naiscorp, technology solutions, innovation, digital transformation',
+    keywords: doc?.meta?.keywords || 'Telamonix, technology solutions, innovation, digital transformation',
     openGraph: mergeOpenGraph({
       title,
       description: doc?.meta?.description || '',

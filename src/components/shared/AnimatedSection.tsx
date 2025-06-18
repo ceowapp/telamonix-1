@@ -37,12 +37,13 @@ const AnimatedSection = ({ children, animation = 'fadeIn' }) => {
   };
 
   useEffect(() => {
+    // Set initial state
+    controls.start("hidden");
+    
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           controls.start('visible');
-        } else {
-          controls.start('hidden');
         }
       },
       { threshold: 0.1 }

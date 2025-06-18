@@ -1,424 +1,496 @@
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { motion, useAnimation } from 'framer-motion';
-import React, { useRef, useState, useMemo, useEffect, Suspense, useCallback } from 'react';
+"use client"
+import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { gsap } from 'gsap';
-import * as THREE from 'three';
-import { Decal, Float, OrbitControls, Preload, useTexture, Text, Billboard, Sphere, MeshDistortMaterial, useGLTF, Environment, ContactShadows } from '@react-three/drei';
-import { technologies } from "@/constants/landing";
-import FloatLaptop from "./FloatLaptop";
-import Image from 'next/image'
-import { FaArrowRight } from 'react-icons/fa';
+import Image from 'next/image';
+import { FaArrowRight, FaCheck, FaRocket, FaCode, FaShieldAlt } from 'react-icons/fa';
+import LineEffect from './LineEffect';
 
-const CustomButton = ({ text = 'Explore', onClick }) => {
+interface CustomButtonProps {
+  text?: string;
+  onClick?: () => void;
+  primary?: boolean;
+  icon?: React.ReactNode;
+}
+
+const CustomButton: React.FC<CustomButtonProps> = ({
+  text = 'Explore',
+  onClick,
+  primary = true,
+  icon = <FaArrowRight />
+}) => {
   return (
-    <div className="relative w-full sm:w-[200px] md:w-[220px] lg:w-[250px] h-[40px] sm:h-[45px] md:h-[50px]">
-      <motion.button
-        className="tracking-wider bg-transparent text-white relative outline-none border border-white/50 h-full w-full text-xs sm:text-sm overflow-hidden group flex items-center justify-between px-3 sm:px-4"
-        whileHover={{ scale: 1.05 }}
-        transition={{ type: "spring", stiffness: 400, damping: 10 }}
-        onClick={onClick}
+    <motion.button
+      className={`relative w-full sm:w-[220px] tracking-wider text-white outline-none
+        h-[60px] text-sm overflow-hidden group flex items-center justify-center px-6
+        before:absolute before:inset-0 before:bg-gradient-to-r
+        ${primary
+          ? 'before:from-cyan-500 before:via-blue-500 before:to-purple-600 shadow-lg shadow-blue-500/25'
+          : 'before:from-slate-600 before:via-slate-500 before:to-slate-400 shadow-lg shadow-slate-500/25'
+        }
+        before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100
+        bg-gradient-to-r ${primary
+          ? 'from-cyan-600/20 via-blue-600/20 to-purple-600/20 border-cyan-400/50'
+          : 'from-slate-600/20 via-slate-500/20 to-slate-400/20 border-slate-400/50'
+        }
+        border-2 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-2xl
+        ${primary ? 'hover:shadow-cyan-500/40' : 'hover:shadow-slate-500/40'}`}
+      whileHover={{ y: -2 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+      onClick={onClick}
+    >
+      {/* Animated border effect */}
+      <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-transparent via-white/20 to-transparent
+        opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300" />
+
+      <motion.span
+        className="relative z-10 flex items-center justify-center gap-3 font-medium"
+        whileHover={{ x: 3 }}
+        transition={{ duration: 0.2 }}
       >
+        <span className="text-base">{text}</span>
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500"
-          initial={{ x: "-50%" }}
-          whileHover={{ x: "50%" }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute inset-0 bg-white opacity-20"
-          initial={{ x: "0%" }}
-          whileHover={{ x: "100%" }}
-          transition={{ duration: 0.3, delay: 0.1, ease: "easeInOut" }}
-        />
-        <motion.span
-          className="relative z-10 flex items-center justify-between w-full"
-          initial={{ x: "55%" }}
-          whileHover={{ x: "0%" }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
+          whileHover={{ x: 5, rotate: -15 }}
+          transition={{ duration: 0.2 }}
         >
-          <span>{text}</span>
-          <FaArrowRight className="text-white text-sm sm:text-base md:text-lg lg:text-xl" />
-        </motion.span>
-      </motion.button>
-    </div>
+          {icon}
+        </motion.div>
+      </motion.span>
+    </motion.button>
   );
 };
 
-const TypewriterEffect = ({ texts, speed = 50, delayBetweenTexts = 2000 }) => {
+interface TypewriterEffectProps {
+  texts: string[];
+  speed?: number;
+  delayBetweenTexts?: number;
+}
+const TypewriterEffect: React.FC<TypewriterEffectProps> = ({
+  texts,
+  speed = 100,
+  delayBetweenTexts = 2000
+}) => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
-  const cursorControls = useAnimation();
-  const charControls = useAnimation();
+  const [showGlitch, setShowGlitch] = useState(false);
+  const cursorRef = useRef<HTMLDivElement>(null);
 
   const typeText = useCallback(() => {
     const currentText = texts[currentTextIndex];
-    
-    if (!isDeleting && displayedText.length < currentText.length) {
-      setDisplayedText(currentText.slice(0, displayedText.length + 1));
-      charControls.start({
-        scale: [1, 1.2, 1],
-        transition: { duration: 0.2 }
-      });
-    } else if (isDeleting && displayedText.length > 0) {
-      setDisplayedText(displayedText.slice(0, -1));
-    } else if (displayedText.length === currentText.length) {
-      setTimeout(() => setIsDeleting(true), delayBetweenTexts);
-    } else if (isDeleting && displayedText.length === 0) {
-      setIsDeleting(false);
-      setCurrentTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
+    if (!currentText) {
+      return;
     }
-  }, [texts, currentTextIndex, displayedText, isDeleting, charControls, delayBetweenTexts]);
+
+    if (!isDeleting) {
+      if (displayedText.length < currentText.length) {
+        const nextText = currentText.slice(0, displayedText.length + 1);
+        setDisplayedText(nextText);
+      } else {
+        setTimeout(() => {
+          setShowGlitch(true);
+          setTimeout(() => {
+            setShowGlitch(false);
+            setIsDeleting(true);
+          }, 500); 
+        }, delayBetweenTexts);
+      }
+    } else { 
+      if (displayedText.length > 0) {
+        const nextText = displayedText.slice(0, -1);
+        setDisplayedText(nextText);
+      } else {
+        setIsDeleting(false);
+        setCurrentTextIndex((prevIndex) => {
+          const nextIndex = (prevIndex + 1) % texts.length;
+          return nextIndex;
+        });
+      }
+    }
+  }, [texts, currentTextIndex, displayedText, isDeleting, delayBetweenTexts]);
 
   useEffect(() => {
-    const timeout = setTimeout(typeText, isDeleting ? speed / 2 : speed);
-    return () => clearTimeout(timeout);
-  }, [typeText, isDeleting, speed]);
+    if (!showGlitch) {
+      const timeout = setTimeout(typeText, isDeleting ? speed / 2 : speed);
+      return () => {
+        clearTimeout(timeout);
+      };
+    } else {
+        console.log('useEffect: Glitch active, skipping timeout for typeText.');
+    }
+  }, [typeText, isDeleting, speed, showGlitch, displayedText]); // Added displayedText as dependency
 
   useEffect(() => {
-    cursorControls.start({
-      opacity: [0, 1],
-      transition: {
+    if (cursorRef.current) {
+      const animation = gsap.to(cursorRef.current, {
+        opacity: 0,
         duration: 0.5,
-        repeat: Infinity,
-        repeatType: 'reverse',
-      },
-    });
-  }, [cursorControls]);
+        repeat: -1,
+        yoyo: true,
+        ease: "power2.inOut"
+      });
+      return () => {
+        animation.kill();
+      };
+    }
+  }, []);
 
   return (
-    <div className="relative top-4 bottom-2 text-white text-sm sm:text-base md:text-md lg:text-lg xl:text-xl tracking-wider">
-      {displayedText.split('').map((char, i) => (
-        <motion.span
-          key={i}
-          initial={{ opacity: 0 }}
-          animate={i === displayedText.length - 1 ? charControls : { opacity: 1 }}
-          className="inline-block"
-        >
-          {char === ' ' ? '\u00A0' : char}
-        </motion.span>
-      ))}
-      <motion.div
-        className="inline-block overflow-hidden mt-0 absolute w-[2px] sm:w-[3px] h-[18px] sm:h-[24px] ml-1 bg-white"
-        animate={cursorControls}
+    <div className="relative text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400
+      text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-wider min-h-[60px] sm:min-h-[70px] md:min-h-[80px] font-light">
+      <motion.span
+        className={`${showGlitch ? 'animate-pulse' : ''}`}
+        animate={showGlitch ? { x: [0, -2, 2, 0], opacity: [1, 0.8, 1, 1] } : { opacity: 1, x: 0 }}
+        transition={{ duration: 0.1, repeat: showGlitch ? 5 : 0 }}
+      >
+        {displayedText}
+      </motion.span>
+      <div
+        ref={cursorRef}
+        className="inline-block absolute w-[3px] sm:w-[4px] h-[24px] sm:h-[32px] md:h-[40px] ml-1
+          bg-gradient-to-b from-cyan-400 to-blue-600 rounded-full"
       />
     </div>
   );
 };
 
-const HeroSectionInfo = ({ handleScrollTo }) => {
-  const maskImages = [
-    '/images/global/HeroSection/HeroSection-background-bottom-line-1.png',
-    '/images/global/HeroSection/HeroSection-background-bottom-line-2.png',
-    '/images/global/HeroSection/HeroSection-background-bottom-line-3.png',
-    '/images/global/HeroSection/HeroSection-background-bottom-line-4.png',
-    '/images/global/HeroSection/HeroSection-background-bottom-ray.png'
-  ];
 
-  const companyLogos = [
-    '/images/global/partner/google.png',
-    '/images/global/partner/microsoft.png',
-    '/images/global/partner/clerk.png',
-  ];
+const RotatingText: React.FC = () => {
+  const texts = ['INDIVIDUALS', 'STARTUPS', 'BUSINESSES', 'ENTERPRISES'];
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [texts.length]);
 
   return (
-    <div className="w-full h-full flex flex-col">
-      <div className="h-screen bg-[#0a0118]">
-        <div className="absolute top-[10%] sm:top-[15%] md:top-[20%] left-0 sm:left-[8%] pointer-events-none w-full sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[60%] z-50">
-          <div className="relative w-full h-[202px] mb-[85px] left-1/5 bg-HeroSection-background-top bg-no-repeat bg-contain">
-            <div 
-              className="w-full h-full absolute top-0 left-0 mix-blend-overlay bg-no-repeat bg-contain"
-              style={{ 
-                '-webkit-mask-image': 'url(/images/global/HeroSection/HeroSection-background-top-mask.png)', 
-                'mask-image': 'url(/images/global/HeroSection/HeroSection-background-top-mask.png)'
-              }}
-            >
-            <div 
-              className="relative top-0 animate-topAnimation bg-HeroSection-gradient-top h-[200px] w-full translate-y-[-202px]"
-            ></div>
-            </div>
-          </div>
-          <div className="HeroSection-background-bottom">
-            <div className="HeroSection-background-bottom-background">
-              <picture>
-                <source media="(max-width: 1248px)" srcSet="/images/global/HeroSection/mobile/HeroSection-background.png" />
-                <img alt="alt_text_1" src="/images/global/HeroSection/HeroSection-background-bottom.png" />
-              </picture>
-            </div>
-            <div
-              style={{ 'mask-image': "url('/images/global/HeroSection/HeroSection-background-bottom-line-1.png')" }}
-              className="lazy-background-image lazy-background-image-maskImage-1 lazy-background-image-loaded HeroSection-background-bottom-line-animation"
-            >
-              <div></div>
-            </div>
-            <div
-              style={{ 'mask-image': "url('/images/global/HeroSection/HeroSection-background-bottom-line-2.png')" }}
-              className="lazy-background-image lazy-background-image-maskImage-2 lazy-background-image-loaded HeroSection-background-bottom-line-animation"
-            >
-              <div></div>
-            </div>
-            <div
-              style={{ 'mask-image': "url('/images/global/HeroSection/HeroSection-background-bottom-line-3.png')" }}
-              className="lazy-background-image lazy-background-image-maskImage-3 lazy-background-image-loaded HeroSection-background-bottom-line-animation"
-            >
-              <div></div>
-            </div>
-            <div
-              style={{ 'mask-image': "url('/images/global/HeroSection/HeroSection-background-bottom-line-4.png')" }}
-              className="lazy-background-image lazy-background-image-maskImage-4 lazy-background-image-loaded HeroSection-background-bottom-line-animation"
-            >
-              <div></div>
-            </div>
-            <div
-              style={{ 'mask-image': "url('/images/global/HeroSection/HeroSection-background-bottom-ray.png')" }}
-              className="lazy-background-image lazy-background-image-maskImage-5 lazy-background-image-loaded HeroSection-background-bottom-ray-animation"
-            >
-              <div></div>
-            </div>
-          </div>
-
-          <div className="absolute -top-14 left-0 xl:left-[5%] flex flex-col justify-center w-full xl:w-1/2 mx-0 px-3">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="max-w-3xl"
-            >
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight mb-4">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
-                  Telamonix provides solutions for
-                </span>
-              </h2>
-              <div className="relative max-h-16 sm:h-20 overflow-hidden">
-                <motion.div 
-                  animate={{ y: [0, -80, -160, -240, 0] }}
-                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                  className="whitespace-nowrap text-xl sm:text-2xl lg:text-3xl font-bold"
-                >
-                  <div className="h-16 sm:h-20 flex items-center bg-gradient-to-r from-red-500 via-orange-500 to-purple-600 text-transparent bg-clip-text">INDIVIDUALS</div>
-                  <div className="h-16 sm:h-20 flex items-center bg-gradient-to-r from-red-500 via-orange-500 to-purple-600 text-transparent bg-clip-text">STARTUPS</div>
-                  <div className="h-16 sm:h-20 flex items-center bg-gradient-to-r from-red-500 via-orange-500 to-purple-600 text-transparent bg-clip-text">BUSINESSES</div>
-                  <div className="h-16 sm:h-20 flex items-center bg-gradient-to-r from-red-500 via-orange-500 to-purple-600 text-transparent bg-clip-text">ENTERPRISES</div>
-                </motion.div>
-              </div>
-              <div className="mb-8">
-                <TypewriterEffect 
-                  texts={[
-                    "Telamonix provides optimal solutions to your problems.",
-                    "We transform ideas into reality.",
-                    "Innovate, Create, Succeed with Telamonix."
-                  ]} 
-                  speed={50} 
-                  delayBetweenTexts={2000}
-                />
-              </div>
-
-              <div className="mb-8">
-                <h3 className="text-white text-xl font-semibold mb-4">Partnered With</h3>
-                <div className="flex space-x-6 overflow-x-auto">
-                  {companyLogos.map((logo, index) => (
-                    <motion.div
-                      key={index}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <Image
-                        src={logo}
-                        alt={`Company Logo ${index + 1}`}
-                        width={56} 
-                        height={56}
-                        className="filter transition-all duration-300"
-                      />
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-8 mb-8">
-                {[
-                  { label: "Projects", value: "50+" },
-                  { label: "Experience", value: "5+" },
-                  { label: "Rating", value: "5" }
-                ].map((item, index) => (
-                  <motion.div 
-                    key={index}
-                    whileHover={{ scale: 1.05 }}
-                    className="text-center p-4 bg-white bg-opacity-10 rounded-lg backdrop-filter backdrop-blur-lg"
-                  >
-                    <h4 className="text-sm uppercase mb-2 text-white/80">{item.label}</h4>
-                    <div className="text-3xl font-bold text-blue-400">{item.value}</div>
-                  </motion.div>
-                ))}
-              </div>
-              <div className="relative mt-4 sm:mt-6 md:mt-8 pointer-events-auto cursor-pointer">
-                <CustomButton text="Get In Touch" onClick={handleScrollTo} />
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </div>
+    <div className="relative h-16 sm:h-20 md:h-24 lg:h-28 overflow-hidden">
+      <motion.div
+        key={currentIndex}
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: -50, opacity: 0 }}
+        transition={{
+          duration: 0.8,
+          ease: [0.25, 0.46, 0.45, 0.94]
+        }}
+        className="absolute inset-0 flex items-center justify-center text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold
+          bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 text-transparent bg-clip-text"
+      >
+        {texts[currentIndex]}
+      </motion.div>
     </div>
   );
 };
 
-const HeroSection = ({ handleScrollTo }) => {
-  const headingRef = useRef();
-  
+const SlidingText: React.FC = () => {
+  const texts = ['INDIVIDUALS', 'STARTUPS', 'BUSINESSES', 'ENTERPRISES'];
+
+  return (
+    <div className="relative h-20 sm:h-24 md:h-28 lg:h-32 overflow-hidden">
+      <motion.div
+        animate={{
+          y: [0, -80, -160, -240, 0]
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut",
+          times: [0, 0.25, 0.5, 0.75, 1]
+        }}
+        className="flex flex-col"
+      >
+        {texts.map((text, index) => (
+          <div
+            key={index}
+            className="h-20 sm:h-24 md:h-28 lg:h-32 flex items-center justify-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold
+              bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 text-transparent bg-clip-text"
+          >
+            {text}
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  );
+};
+
+interface AnimatedCounterProps {
+  target: number;
+  label: string;
+  prefix?: string;
+  suffix?: string;
+  icon?: React.ReactNode;
+}
+
+const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
+  target,
+  label,
+  prefix = '',
+  suffix = '',
+  icon
+}) => {
+  const [count, setCount] = useState(0);
+  const counterRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    gsap.from(headingRef.current, {
-      duration: 1,
-      y: 100,
-      opacity: 0,
-      ease: 'power3.out',
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          let start = 0;
+          const duration = 2500;
+          const step = (timestamp: number) => {
+            if (!start) start = timestamp;
+            const progress = Math.min((timestamp - start) / duration, 1);
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.floor(easeOut * target));
+            if (progress < 1) {
+              window.requestAnimationFrame(step);
+            }
+          };
+          window.requestAnimationFrame(step);
+          if (counterRef.current) {
+            observer.unobserve(counterRef.current);
+          }
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (counterRef.current) {
+      observer.observe(counterRef.current);
+    }
+
+    return () => {
+      if (counterRef.current) {
+        observer.unobserve(counterRef.current);
+      }
+    };
+  }, [target]);
+
+  return (
+    <motion.div
+      ref={counterRef}
+      whileHover={{ scale: 1.08, y: -5 }}
+      className="relative text-center p-6 bg-gradient-to-br from-white/5 via-cyan-500/5 to-blue-500/5
+        rounded-2xl backdrop-blur-lg border border-cyan-500/20 shadow-lg shadow-cyan-500/10
+        hover:shadow-xl hover:shadow-cyan-500/20 transition-all duration-300 group overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10
+        opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+
+      <div className="relative z-10">
+        {icon && (
+          <div className="text-2xl sm:text-3xl text-cyan-400 mb-2 flex justify-center">
+            {icon}
+          </div>
+        )}
+        <div className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-clip-text text-transparent
+          bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 mb-2">
+          {prefix}{count}{suffix}
+        </div>
+        <h4 className="text-xs sm:text-sm uppercase tracking-wider text-cyan-300/80 font-medium">
+          {label}
+        </h4>
+      </div>
+    </motion.div>
+  );
+};
+
+interface HeroSectionProps {
+  handleScrollTo: () => void;
+}
+
+const HeroSection: React.FC<HeroSectionProps> = ({ handleScrollTo }) => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const lineContainerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const elements = sectionRef.current.querySelectorAll('.animate-in');
+    gsap.fromTo(elements,
+      { y: 60, opacity: 0, scale: 0.9 },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        stagger: 0.15,
+        duration: 1.2,
+        ease: 'power3.out'
+      }
+    );
   }, []);
 
   return (
-    <section className="relative w-full h-full bg-[#0a0118] rounded-b-3xl overflow-hidden">
-      <div className="container mx-auto px-0 xl:px-4">
-        <div className="flex flex-col xl:flex-row min-h-screen h-full">
-          <div className="w-full flex xl:w-1/2 py-8 xl:py-0">
-            <HeroSectionInfo handleScrollTo={handleScrollTo} />
-          </div>
-          <div className="hidden xl:block w-1/2 relative">
-            <HeroSectionScene />
-          </div>
+    <section ref={sectionRef} className="relative w-full min-h-screen">
+      <motion.div className="absolute inset-0 overflow-hidden" style={{ y }}>
+        <div className="absolute top-[-15%] right-[-10%] w-[50%] h-[50%] rounded-full
+          bg-gradient-to-br from-cyan-500/20 via-blue-500/15 to-purple-600/20 blur-[80px]" />
+        <div className="absolute top-[10%] right-[60%] w-[30%] h-[30%] rounded-full
+          bg-gradient-to-br from-purple-500/15 to-pink-500/10 blur-[80px]" />
+        <div className="absolute bottom-[-15%] left-[-10%] w-[45%] h-[45%] rounded-full
+          bg-gradient-to-tr from-blue-500/20 via-cyan-500/15 to-teal-500/20 blur-[60px]" />
+        <div className="absolute inset-0 opacity-[0.1]">
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.1)_1px,transparent_1px)]
+            bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
         </div>
-      </div>
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0118] via-[#12033a]/80 to-transparent" />
+      </motion.div>
+
+      <div ref={lineContainerRef} className="absolute inset-0 z-0 opacity-20" />
+      <LineEffect containerRef={lineContainerRef} />
+
+      <motion.div
+        className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32 mb-[356px] relative z-10"
+        style={{ opacity }}
+      >
+        <div className="flex flex-col items-center justify-center text-center max-w-6xl mx-auto">
+          <div className="space-y-8 animate-in">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold
+                leading-tight tracking-tight">
+                <span className="block bg-clip-text text-transparent bg-gradient-to-r
+                  from-cyan-400 via-blue-500 to-purple-600 mb-2 sm:mb-4">
+                  Telamonix
+                </span>
+                <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl
+                  text-white/90 font-light tracking-wide">
+                  provides solutions for
+                </span>
+              </h1>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            >
+              <RotatingText />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="max-w-3xl mx-auto"
+            >
+              <TypewriterEffect
+                texts={[
+                  "Transforming ideas into digital reality with cutting-edge innovation.",
+                  "Building the future of technology, one solution at a time.",
+                  "Where visionary concepts meet flawless execution."
+                ]}
+                speed={60}
+                delayBetweenTexts={4000}
+              />
+            </motion.div>
+          </div>
+
+          <motion.div
+            className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 animate-in max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1 }}
+          >
+            {[
+              { text: 'Expert Development Team', icon: <FaCode className="text-cyan-400" /> },
+              { text: 'Cutting-Edge Technology', icon: <FaRocket className="text-blue-400" /> },
+              { text: 'Enterprise-Grade Security', icon: <FaShieldAlt className="text-purple-400" /> }
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="flex flex-col sm:flex-row items-center justify-center sm:justify-start space-y-2 sm:space-y-0 sm:space-x-3
+                  p-4 sm:p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm
+                  border border-white/10 hover:border-cyan-400/30 transition-all duration-300 group"
+              >
+                <div className="flex-shrink-0 text-2xl sm:text-xl group-hover:scale-110 transition-transform duration-300">
+                  {feature.icon}
+                </div>
+                <span className="text-white/90 text-center sm:text-left font-medium text-sm sm:text-base">
+                  {feature.text}
+                </span>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            className="flex flex-col sm:flex-row gap-6 mt-12 sm:mt-16 animate-in"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+          >
+            <CustomButton
+              text="Start Your Journey"
+              onClick={handleScrollTo}
+              primary={true}
+              icon={<FaRocket />}
+            />
+            <CustomButton
+              text="Explore Services"
+              onClick={() => {}}
+              primary={false}
+              icon={<FaArrowRight />}
+            />
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mt-16 sm:mt-20 animate-in max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.4 }}
+          >
+            <AnimatedCounter
+              label="Projects Delivered"
+              target={150}
+              suffix="+"
+              icon={<FaCheck />}
+            />
+            <AnimatedCounter
+              label="Years Experience"
+              target={8}
+              suffix="+"
+              icon={<FaRocket />}
+            />
+            <AnimatedCounter
+              label="Client Rating"
+              target={5}
+              prefix="★ "
+              icon={<FaShieldAlt />}
+            />
+          </motion.div>
+        </div>
+        <motion.div
+          className="relative top-32 left-1/2 transform -translate-x-1/2 z-20"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <div className="w-6 h-10 border-2 border-cyan-400/50 rounded-full flex justify-center">
+            <motion.div
+              className="w-1 h-3 bg-gradient-to-b from-cyan-400 to-blue-500 rounded-full mt-2"
+              animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
 
-const Ball = ({ texture, name, text, position }) => {
-  const [decal] = useTexture([texture]);
-  const meshRef = useRef();
-  const [hovered, setHovered] = useState(false);
-  const [clicked, setClicked] = useState(false);
-  
-  useFrame(({ mouse, viewport }) => {
-    const x = (mouse.x * viewport.width) / 2;
-    const y = (mouse.y * viewport.height) / 2;
-    meshRef.current.lookAt(x, y, 5);
-  });
-
-  return (
-    <Float speed={1.75} rotationIntensity={1} floatIntensity={2}>
-      <mesh
-        ref={meshRef}
-        position={position}
-        castShadow
-        receiveShadow
-        scale={clicked ? 1 : 0.75}
-        onClick={() => setClicked(!clicked)}
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
-      >
-        <icosahedronGeometry args={[1, 1]} />
-        <meshStandardMaterial
-          color={hovered ? '#ff8eb3' : '#ffffff'}
-          polygonOffset
-          polygonOffsetFactor={-5}
-          flatShading
-        />
-        <Decal
-          position={[0, 0, 1]}
-          rotation={[-2*Math.PI, 0, 6.25]}
-          scale={2}
-          map={decal}
-        />
-      </mesh>
-    </Float>
-  );
-};
-
-const Cloud = ({ technologies }) => {
-  const groupRef = useRef();
-  const positions = useMemo(() => {
-    return technologies.map(() => {
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos(Math.random() * 2 - 1);
-      const radius = 1.8 + Math.random() * 2;
-      return new THREE.Vector3(
-        radius * Math.sin(phi) * Math.cos(theta),
-        radius * Math.sin(phi) * Math.sin(theta) + 3,
-        radius * Math.cos(phi)
-      );
-    });
-  }, [technologies]);
-
-  const targetX = 3;
-  const startX = 0.5;
-  const animationDuration = 2; // Duration in seconds
-  const startTime = useRef(null);
-
-  useEffect(() => {
-    startTime.current = Date.now() / 1000; // Set start time when component mounts
-  }, []);
-
-  useFrame(() => {
-    if (groupRef.current) {
-      const currentTime = Date.now() / 1000;
-      const elapsedTime = currentTime - startTime.current;
-      const progress = Math.min(elapsedTime / animationDuration, 1);
-      
-      // Easing function (ease-out cubic)
-      const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
-
-      const newX = startX + (targetX - startX) * easeOutCubic(progress);
-      groupRef.current.position.x = newX;
-    }
-  });
-
-  return (
-    <group ref={groupRef} position={[startX, 2.5, 12.5]}>
-      {technologies.map((tech, index) => (
-        <Ball key={`${tech.name}-${index}`} texture={tech.texture} name={tech.name} text={tech.text} position={positions[index]} />
-      ))}
-    </group>
-  );
-};
-
-const Scene = () => {
-  const groupRef = useRef();
-  const { viewport } = useThree();
-
-  useFrame(({ mouse }) => {
-    const x = (mouse.x * viewport.width) / 2;
-    const y = (mouse.y * viewport.height) / 2;
-    //groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, x * 0.1, 0.1);
-    //groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, -y * 0.1, 0.1);
-  });
-
-  return (
-    <group ref={groupRef} position={[9.5, -5, -9.5]} scale={1.2} rotation={[0, -Math.PI / 3, 0]}>
-      <Cloud technologies={technologies} />
-    </group>
-  );
-};
-
-const HeroSectionScene = () => {
-  return (
-    <Canvas 
-      camera={{ position: [0, 0, 20], fov: 55 }}
-      style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}}
-      gl={{ alpha: true, antialias: true, preserveDrawingBuffer: true }}
-    >
-      <ambientLight intensity={0.5} />
-      <pointLight position={[10, 10, 10]} intensity={1} />
-      <React.Suspense fallback={null}>
-        <Scene />
-        <group position={[16, -6, -37.5]} scale={1.2} rotation={[0, -Math.PI / 4, 0]}>
-          <FloatLaptop />
-        </group>
-        <Environment preset="city" />
-      </React.Suspense>
-      <ContactShadows position={[0, -4.5, 0]} scale={20} blur={2} far={4.5} />
-      <OrbitControls enablePan={false} enableZoom={false} minPolarAngle={Math.PI / 3} maxPolarAngle={Math.PI / 2} />
-      <Preload all />
-    </Canvas>
-  );
-};
-
-export default HeroSection;
-
-
+export default React.memo(HeroSection);

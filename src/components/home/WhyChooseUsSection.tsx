@@ -1,82 +1,189 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FaRocket, FaUsers, FaLightbulb, FaShieldAlt, FaClock, FaChartLine, FaHandshake, FaGlobe } from 'react-icons/fa';
+"use client"
+import React, { useState, useEffect } from 'react';
+import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { reasons } from '@/constants/data'; 
 
-const reasons = [
-  { icon: FaRocket, title: 'Innovative Solutions', description: 'Cutting-edge technology to keep you ahead', color: 'from-blue-400 to-indigo-600' },
-  { icon: FaUsers, title: 'Expert Team', description: 'Skilled professionals with years of experience', color: 'from-green-400 to-teal-600' },
-  { icon: FaLightbulb, title: 'Customized Approach', description: 'Tailored solutions to fit your unique needs', color: 'from-yellow-400 to-orange-600' },
-  { icon: FaShieldAlt, title: 'Reliable Security', description: 'Top-notch security measures to protect your data', color: 'from-red-400 to-pink-600' },
-  { icon: FaClock, title: 'Timely Delivery', description: 'Efficient processes ensuring on-time project completion', color: 'from-purple-400 to-indigo-600' },
-  { icon: FaChartLine, title: 'Scalable Solutions', description: 'Grow your business with our adaptable technologies', color: 'from-cyan-400 to-blue-600' },
-  { icon: FaHandshake, title: 'Dedicated Support', description: '24/7 customer service and technical assistance', color: 'from-amber-400 to-orange-600' },
-  { icon: FaGlobe, title: 'Global Reach', description: 'Serving clients worldwide with localized expertise', color: 'from-emerald-400 to-green-600' },
-];
+interface Reason {
+  icon: React.ElementType;
+  title: string;
+  description: string;
+  colorClass: string; 
+}
 
-const WhyChooseUsSection = () => {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
+const CardItem = ({ reason }: { reason: Reason }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const containerCardClass = `container-card ${reason.colorClass || 'bg-green-box'}`;
   return (
-    <section id="why-choose-us" className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="container mx-auto px-6" ref={ref}>
-        <motion.h2 
-          className="text-5xl font-extrabold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600"
-          initial={{ opacity: 0, y: -50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          Why Choose Us
-        </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {reasons.map((reason, index) => (
-            <motion.div
-              key={index}
-              className="relative group"
-              initial={{ opacity: 0, y: 50 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              onHoverStart={() => setHoveredIndex(index)}
-              onHoverEnd={() => setHoveredIndex(null)}
-            >
-              <div className={`absolute inset-0 bg-gradient-to-r ${reason.color} rounded-xl opacity-75 group-hover:opacity-100 transition-opacity duration-300`}></div>
-              <div className="relative bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg p-6 rounded-xl shadow-xl overflow-hidden h-full flex flex-col justify-between">
-                <motion.div
-                  className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"
-                  initial={false}
-                  animate={hoveredIndex === index ? { scale: 1.5 } : { scale: 1 }}
-                  transition={{ duration: 0.6 }}
-                />
-                <div>
-                  <reason.icon className="text-4xl text-white mb-4 mx-auto" />
-                  <h3 className="text-xl font-bold mb-2 text-white">{reason.title}</h3>
-                  <p className="text-gray-200 text-sm">{reason.description}</p>
-                </div>
-                <AnimatePresence>
-                  {hoveredIndex === index && (
-                    <motion.div
-                      className="mt-4"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 20 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <button className="bg-white text-gray-900 px-4 py-2 rounded-full font-semibold text-sm hover:bg-opacity-90 transition-colors duration-300">
-                        Learn More
-                      </button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </motion.div>
-          ))}
+    <div
+      className="card-post"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className={containerCardClass}>
+        <div className={`rounded-full p-4 bg-white/10 backdrop-blur-md max-w-fit ${reason.colorClass || 'bg-green-box'}`}>
+          <reason.icon className="text-3xl text-white" />
+        </div>
+        <h3 className="text-xl font-bold mb-3 text-white group-hover:text-yellow-200 transition-colors duration-300">
+          {reason.title}
+        </h3>
+        <p className="text-gray-100 text-sm">{reason.description}</p>
+        <div className="shine"></div>
+        <div className="background">
+          <div className="tiles">
+            <div className="tile tile-1"></div>
+            <div className="tile tile-2"></div>
+            <div className="tile tile-3"></div>
+            <div className="tile tile-4"></div>
+
+            <div className="tile tile-5"></div>
+            <div className="tile tile-6"></div>
+            <div className="tile tile-7"></div>
+            <div className="tile tile-8"></div>
+
+            <div className="tile tile-9"></div>
+            <div className="tile tile-10"></div>
+          </div>
+
+          <div className="line line-1"></div>
+          <div className="line line-2"></div>
+          <div className="line line-3"></div>
         </div>
       </div>
-    </section>
+    </div>
+  );
+};
+
+const WhyChooseUsSection = () => {
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: false,
+  });
+
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    } else {
+      controls.start('hidden');
+    }
+  }, [controls, inView]);
+
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: {
+      opacity: 0,
+      y: 20,
+      transition: {
+        duration: 0.8,
+        ease: "easeIn"
+      }
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const titleVariants = {
+    hidden: {
+      opacity: 0,
+      y: -30,
+      transition: {
+        duration: 1,
+        ease: "easeIn"
+      }
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  return (
+    <>
+      <section className="py-24 relative overflow-hidden">
+        {/* Animated background patterns */}
+        <div className="absolute inset-0 opacity-5">
+          <motion.div
+            className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-br from-[#0945EB] via-[#67D1FF] to-[#0945EB] rounded-full blur-3xl"
+            animate={{
+              x: [50, -50, 50],
+              y: [-50, 50, -50],
+              opacity: [0.2, 0.3, 0.2]
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+          <motion.div
+            className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-gradient-to-br from-[#0945EB] via-[#67D1FF] to-[#0945EB] rounded-full blur-3xl"
+            animate={{
+              x: [-30, 30, -30],
+              y: [30, -30, 30],
+              opacity: [0.2, 0.3, 0.2]
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+        </div>
+
+        <div className="container mx-auto px-6 relative z-10" ref={ref}>
+          <motion.div
+            variants={titleVariants}
+            initial="hidden"
+            animate={controls}
+            className="text-center mb-20"
+          >
+            <div className="inline-block">
+              <h2 className="text-5xl sm:text-6xl font-bold text-white mb-6">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0945EB] via-[#67D1FF] to-[#0945EB]">
+                  Why Choose Us
+                </span>
+              </h2>
+            </div>
+            <p className="text-xl text-blue-100 mt-6 max-w-3xl mx-auto">
+              We deliver exceptional solutions with unmatched expertise and dedication
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            animate={controls}
+          >
+            {reasons.map((reason, index) => (
+              <motion.div key={index} variants={itemVariants}>
+                <CardItem reason={reason} />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+    </>
   );
 };
 

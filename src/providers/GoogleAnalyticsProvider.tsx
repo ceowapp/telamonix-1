@@ -7,7 +7,7 @@ export default function GoogleAnalyticsProvider() {
     <>
       <Script 
         strategy="afterInteractive" 
-        src="https://www.googletagmanager.com/gtag/js?id=G-9VCKN3KBJJ"
+        src="https://www.googletagmanager.com/gtag/js?id=G-B2MHFVBTDV"
       />
       <Script 
         id="google-analytics" 
@@ -17,7 +17,7 @@ export default function GoogleAnalyticsProvider() {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-9VCKN3KBJJ');
+          gtag('config', 'G-B2MHFVBTDV');
         `}
       </Script>
     </>

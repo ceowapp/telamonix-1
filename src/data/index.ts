@@ -4,6 +4,8 @@ import {
   Solutions,
   SolutionsChild,
   Divisions,
+  Pricing,
+  Projects,
   DivisionsChild,
   Technology,
   Careers,
@@ -34,11 +36,21 @@ export const PAGE_COMPONENTS = {
   'divisions': Divisions,
   'cac_bo_phan': Divisions,
   'ye_wu_bu_men': Divisions,
+
+  // Pricing pages (all languages)
+  'pricing': Pricing,
+  'bao_gia': Pricing,
+  'ye_wu_bu_men': Pricing,
   
   // Technology pages (all languages)
   'technology': Technology,
   'cong_nghe': Technology,
   'ji_shu': Technology,
+
+  // Projects pages (all languages)
+  'projects': Projects,
+  'du_an': Projects,
+  'xiang_mu': Projects,
   
   // Careers pages (all languages)
   'careers': Careers,
