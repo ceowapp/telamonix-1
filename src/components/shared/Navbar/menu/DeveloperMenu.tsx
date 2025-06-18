@@ -15,7 +15,7 @@ const MenuLink = forwardRef(({ type, href, imageSrc, title, description, beta },
       whileTap={{ scale: 0.95 }}
     >
       {isMainLink && (
-        <div className="h-16 w-16 border border-white border-opacity-20 bg-purple-700 rounded-lg flex justify-center items-center shadow-lg">
+        <div className="h-16 w-16 min-w-16 min-h-16 border border-white border-opacity-20 bg-purple-700 rounded-lg flex justify-center items-center shadow-lg">
           <Image
             className="max-w-full align-middle"
             src={imageSrc}

@@ -184,7 +184,7 @@ return (
               <MenuWrapper className="w-[56rem]" index={1} hovering={hovering}>
                 <DeveloperMenu ref={ref => refs.current[1] = ref} />
               </MenuWrapper>
-              <MenuWrapper className="w-[56rem]" index={2} hovering={hovering}>
+              <MenuWrapper className="w-[52rem]" index={2} hovering={hovering}>
                 <ResourceMenu ref={ref => refs.current[2] = ref} />
               </MenuWrapper>
             </div>
