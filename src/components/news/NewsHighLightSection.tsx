@@ -35,7 +35,7 @@ const NewsHighLightSection: React.FC<NewsHighLightSectionProps> = ({
   const showLoading = loading || !!error;
   const firstItem = posts[0];
   return (
-    <div className="w-full bg-white rounded-[16px] mr-2 px-4 py-4">
+    <div className="w-full bg-[#0a0118] rounded-[16px] mr-2 px-4 py-4">
       <h2 className="text-title-medium-black py-4">
         {newsLocaleMap.weeklyHighlights[language]}
       </h2>
@@ -73,3 +73,5 @@ const NewsHighLightSection: React.FC<NewsHighLightSectionProps> = ({
 };
 
 export default NewsHighLightSection;
+
+
