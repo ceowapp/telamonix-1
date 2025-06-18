@@ -36,22 +36,22 @@ import LanguageSelector from "../LanguageSelector";
 import './style.css';
 
 const icons = {
-  globe: <GlobeIcon className="text-primary" fill="currentColor" size={30} />,
-  deviceMobile: <DeviceMobileIcon className="text-secondary" fill="currentColor" size={30} />,
-  cpu: <ChipIcon className="text-warning" fill="currentColor" size={30} />,
-  chartBar: <ChartBarIcon className="text-success" fill="currentColor" size={30} />,
-  cloud: <CloudIcon className="text-info" fill="currentColor" size={30} />,
-  cog: <CogIcon className="text-danger" fill="currentColor" size={30} />,
-  folder: <FolderIcon className="text-primary" fill="currentColor" size={30} />,
-  currencyDollar: <CurrencyDollarIcon className="text-success" fill="currentColor" size={30} />,
-  office: <OfficeBuildingIcon className="text-secondary" fill="currentColor" size={30} />,
-  code: <CodeIcon className="text-warning" fill="currentColor" size={30} />,
-  users: <UsersIcon className="text-info" fill="currentColor" size={30} />,
-  informationCircle: <InformationCircleIcon className="text-primary" fill="currentColor" size={30} />,
-  support: <SupportIcon className="text-danger" fill="currentColor" size={30} />,
-  lightBulb: <LightBulbIcon className="text-warning" fill="currentColor" size={30} />,
-  collection: <CollectionIcon className="text-secondary" fill="currentColor" size={30} />,
-  briefcase: <BriefcaseIcon className="text-success" fill="currentColor" size={30} />,
+  globe: <GlobeIcon />,
+  deviceMobile: <DeviceMobileIcon />,
+  cpu: <ChipIcon />,
+  chartBar: <ChartBarIcon />,
+  cloud: <CloudIcon />,
+  cog: <CogIcon />,
+  folder: <FolderIcon />,
+  currencyDollar: <CurrencyDollarIcon />,
+  office: <OfficeBuildingIcon />,
+  code: <CodeIcon />,
+  users: <UsersIcon />,
+  informationCircle: <InformationCircleIcon />,
+  support: <SupportIcon />,
+  lightBulb: <LightBulbIcon />,
+  collection: <CollectionIcon />,
+  briefcase: <BriefcaseIcon />,
 };
 
 const MotionLink = motion(Link);
@@ -231,7 +231,7 @@ return (
         </button>
       </div>
     </div>
-    <div className={`${isOpen ? 'maxtabletmd1:block' : 'hidden'} hidden relative h-screen w-full`}>
+    <div className={`${isOpen ? 'maxtabletmd1:block' : 'hidden'} hidden relative h-screen w-full overflow-y-auto`}>
       <div className="px-2 pt-2 pb-3 sm:px-3">
         <div className="relative group">
         {Object.keys(NavbarItemsDropdown).map((key, index) => (
