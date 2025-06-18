@@ -14,16 +14,44 @@ import { MenuWrapper } from "./menu/MenuWrapper";
 import { logoPath } from '@/constants/data';
 import { NavbarItemsNoDropdown, NavbarItemsDropdown } from "@/constants/navbar";
 import { ChevronUp, Scale, Activity, Flash, Server, TagUser, Lock } from "@/icons/navbar-icon";
+import {
+  GlobeIcon,
+  DeviceMobileIcon,
+  ChipIcon,
+  ChartBarIcon,
+  CloudIcon,
+  CogIcon,
+  FolderIcon,
+  CurrencyDollarIcon,
+  OfficeBuildingIcon,
+  CodeIcon,
+  UsersIcon,
+  InformationCircleIcon,
+  SupportIcon,
+  LightBulbIcon,
+  CollectionIcon,
+  BriefcaseIcon,
+} from '@heroicons/react/outline';
 import LanguageSelector from "../LanguageSelector";
 import './style.css';
 
 const icons = {
-  autoscaling: <Scale className="text-warning" fill="currentColor" size={30} />,
-  usageMetrics: <Activity className="text-secondary" fill="currentColor" size={30} />,
-  productionReady: <Flash className="text-primary" fill="currentColor" size={30} />,
-  uptime: <Server className="text-success" fill="currentColor" size={30} />,
-  support: <TagUser className="text-danger" fill="currentColor" size={30} />,
-  security: <Lock className="text-success" fill="currentColor" size={30} />,
+  globe: <GlobeIcon className="text-primary" fill="currentColor" size={30} />,
+  deviceMobile: <DeviceMobileIcon className="text-secondary" fill="currentColor" size={30} />,
+  cpu: <ChipIcon className="text-warning" fill="currentColor" size={30} />,
+  chartBar: <ChartBarIcon className="text-success" fill="currentColor" size={30} />,
+  cloud: <CloudIcon className="text-info" fill="currentColor" size={30} />,
+  cog: <CogIcon className="text-danger" fill="currentColor" size={30} />,
+  folder: <FolderIcon className="text-primary" fill="currentColor" size={30} />,
+  currencyDollar: <CurrencyDollarIcon className="text-success" fill="currentColor" size={30} />,
+  office: <OfficeBuildingIcon className="text-secondary" fill="currentColor" size={30} />,
+  code: <CodeIcon className="text-warning" fill="currentColor" size={30} />,
+  users: <UsersIcon className="text-info" fill="currentColor" size={30} />,
+  informationCircle: <InformationCircleIcon className="text-primary" fill="currentColor" size={30} />,
+  support: <SupportIcon className="text-danger" fill="currentColor" size={30} />,
+  lightBulb: <LightBulbIcon className="text-warning" fill="currentColor" size={30} />,
+  collection: <CollectionIcon className="text-secondary" fill="currentColor" size={30} />,
+  briefcase: <BriefcaseIcon className="text-success" fill="currentColor" size={30} />,
 };
 
 const MotionLink = motion(Link);
@@ -184,7 +212,7 @@ return (
               <MenuWrapper className="w-[56rem]" index={1} hovering={hovering}>
                 <DeveloperMenu ref={ref => refs.current[1] = ref} />
               </MenuWrapper>
-              <MenuWrapper className="w-[52rem]" index={2} hovering={hovering}>
+              <MenuWrapper className="w-[48rem]" index={2} hovering={hovering}>
                 <ResourceMenu ref={ref => refs.current[2] = ref} />
               </MenuWrapper>
             </div>
@@ -205,12 +233,6 @@ return (
     </div>
     <div className={`${isOpen ? 'maxtabletmd1:block' : 'hidden'} hidden relative h-screen w-full`}>
       <div className="px-2 pt-2 pb-3 sm:px-3">
-        <Link href="/blogs" className="dark:text-white text-black text-gray-800 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium transition-all duration-200">
-          News
-        </Link>
-        <Link href="/features" className="dark:text-white text-black text-gray-800 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium transition-all duration-200">
-          Features
-        </Link>
         <div className="relative group">
         {Object.keys(NavbarItemsDropdown).map((key, index) => (
           <Disclosure as={motion.div} key={index} className="mt-4">
@@ -238,7 +260,7 @@ return (
                         key={subIndex}
                         color="foreground"
                         className="block w-full py-2 hover:bg-gray-800 rounded-md transition-colors duration-300"
-                        href="#"
+                        href={subItem.link}
                         size="lg"
                         whileHover={{ x: 5 }}
                       >
@@ -258,6 +280,12 @@ return (
           </Disclosure>
         ))}
         </div>
+        <Link href="/news" className="text-white hover:text-white/80 block px-3 py-2 rounded-md text-base font-medium transition-all duration-200">
+          News
+        </Link>
+        <Link href="/contact" className="text-white hover:text-white/80 block px-3 py-2 rounded-md text-base font-medium transition-all duration-200">
+          Contact
+        </Link>
       </div>
     </div>
   </nav>
