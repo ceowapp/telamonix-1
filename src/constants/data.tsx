@@ -34,7 +34,7 @@ export const homeHeading = {
 export const homeMissionHeading = {
   title: 'Sustainability and Innovation',
   subtitle: 'Driving Innovation to Enhance Productivity and Cost Efficiency',
-  description: 'At Naiscorp, sustainability is about creating smarter solutions that help our clients reduce operational costs while maximizing productivity. By combining cutting-edge technology with innovative approaches, we deliver systems that are not only efficient but also aligned with long-term economic and technological goals.'
+  description: 'At Telamonix, sustainability is about creating smarter solutions that help our clients reduce operational costs while maximizing productivity. By combining cutting-edge technology with innovative approaches, we deliver systems that are not only efficient but also aligned with long-term economic and technological goals.'
 }
 
 export const homeInterHeading = {
@@ -51,7 +51,7 @@ export const homeServices = [
 
 export const homeSolutionsHeading = {
   title: "Summary of ",
-  subtitle: "Naiscorp's solutions",
+  subtitle: "Telamonix's solutions",
 };
 
 export const homeSolutions = [
@@ -350,7 +350,7 @@ export const aboutCoreValues = [
 
 export const aboutValueHeading = {
   title: "Core Values and Philosophy",
-  description: "At Naiscorp, our entrepreneurial spirit is driven by a profound belief in the transformative power of technology. We strive to create ecosystems that not only fuel business growth but also have a positive societal impact."
+  description: "At Telamonix, our entrepreneurial spirit is driven by a profound belief in the transformative power of technology. We strive to create ecosystems that not only fuel business growth but also have a positive societal impact."
 };
 
 export const aboutVisions = [
@@ -383,13 +383,13 @@ export const aboutVisions = [
 
 export const aboutTeamMembersHeading = {
   title: "Leadership Team:",
-  description: "Established in 2006, led by Tai Nguyen, with investment from IDGV and Softbank — proposed for M&A from Google, Microsoft, and Yahoo."
+  description: "Established in 2006, led by Dat Nguyen, with investment from IDGV and Softbank — proposed for M&A from Google, Microsoft, and Yahoo."
 };
 
 export const aboutTeamMembers = [
   {
-    name: "Nguyen Xuan Tai",
-    title: "Founder Naiscorp",
+    name: "Nguyen Tien Dat",
+    title: "Founder Telamonix",
     imageSrc: `${baseMediaUrl}/images/pages/about/about-4.png`,
     backgroundGradient: "linear-gradient(135deg, #F3FBFF 0%, #70B7FF 100%)",
   },
@@ -410,7 +410,7 @@ export const aboutTeamMembers = [
 export const aboutMileStonesHeading = {
   title: "Company",
   subtitle: "Milestone",
-  description: "Established in 2006, led by Tai Nguyen, with investment from IDGVV and Softbank – proposed for MnA from Google, Microsoft, and Yahoo."
+  description: "Established in 2023, led by Dat Nguyen, with investment from IDGVV and Softbank – proposed for MnA from Google, Microsoft, and Yahoo."
 };
 
 export const aboutMileStones = [
@@ -465,19 +465,19 @@ export const contactCarouselImages = [
     src: `${baseMediaUrl}/images/pages/contact/contact-1.png`,
     alt: "Image 1", 
     title: "Manage electronic publishing system", 
-    description: "Established in 2006, led by Tai Nguyen, with investment from IDGVV and Softbank" 
+    description: "Established in 2006, led by Dat Nguyen, with investment from IDGVV and Softbank" 
   },
   { 
     src: `${baseMediaUrl}/images/pages/contact/contact-1.png`,
     alt: "Image 2", 
     title: "Manage electronic publishing system", 
-    description: "Established in 2006, led by Tai Nguyen, with investment from IDGVV and Softbank" 
+    description: "Established in 2006, led by Dat Nguyen, with investment from IDGVV and Softbank" 
   },
   { 
     src: `${baseMediaUrl}/images/pages/contact/contact-1.png`,
     alt: "Image 3", 
     title: "Manage electronic publishing system", 
-    description: "Established in 2006, led by Tai Nguyen, with investment from IDGVV and Softbank" 
+    description: "Established in 2006, led by Dat Nguyen, with investment from IDGVV and Softbank" 
   },
 ];
 
@@ -555,7 +555,7 @@ export const technologyHeading = {
 
 export const technologyHighLightHeading = {
   title: "Cutting-Edge Technologies:",
-  description: "Naiscorp's Behavioral & Activities Tracking solutions are designed to provide unparalleled safety, care, and peace of mind. Contact us to learn how we can help protect your family and optimize your indoor environments with our cutting-edge systems."
+  description: "Telamonix's Behavioral & Activities Tracking solutions are designed to provide unparalleled safety, care, and peace of mind. Contact us to learn how we can help protect your family and optimize your indoor environments with our cutting-edge systems."
 };
 
 export const technologyChips = [
@@ -577,7 +577,7 @@ export const technologyInfo: InfoSectionProps['sections'] = [
         imgSrc: '/images/pages/technology/technology-2.png',
         subtitle: 'Revolutionizing Safety and Care with Advanced Tracking Technologies',
         subtitleClassName: 'text-headline-large mb-6 !leading-tight',
-        description: 'Behavioral and activities tracking at Naiscorp focuses on leveraging advanced computer vision, heat cameras, RGB-D cameras, and surveillance systems to create a comprehensive solution for security and family care. These technologies are designed to enhance safety, provide real-time alerts, and ensure better indoor monitoring for elders, children, and overall home security.',
+        description: 'Behavioral and activities tracking at Telamonix focuses on leveraging advanced computer vision, heat cameras, RGB-D cameras, and surveillance systems to create a comprehensive solution for security and family care. These technologies are designed to enhance safety, provide real-time alerts, and ensure better indoor monitoring for elders, children, and overall home security.',
         imageContainerClassName: 'h-full min-h-[263px] lg:min-h-[373px]',
         imageClassName: 'rounded-[40px] h-full lg:min-h-[373px] w-full md:max-w-[90%] md:left-[10%]',
         descriptionClassName: 'text-body-large-black',
@@ -908,7 +908,7 @@ export const divisionsList = [
 export const productionHeading = {
   title: "Production House",
   subtitle: "Innovating Ideas, Delivering Excellence",
-  description: "Naiscorp Production House is where creativity meets technology to build strategic, high-impact applications for global partners and customers. Our team specializes in crafting solutions that are as visionary as they are functional, addressing unique challenges with precision and innovation."
+  description: "Telamonix Production House is where creativity meets technology to build strategic, high-impact applications for global partners and customers. Our team specializes in crafting solutions that are as visionary as they are functional, addressing unique challenges with precision and innovation."
 };
 
 export const productionInfo = [
@@ -945,7 +945,7 @@ export const productionOffer = [
 export const roboticsHeading = {
   title: "Human Robotics",
   subtitle: "Engineering the Future of Intelligence and Automation.",
-  description: "At Naiscorp Robotics, we push the boundaries of robotics to create intelligent systems that enrich daily life and revolutionize industries. Combining advanced Computer Vision, Spatial Perception, and AI technologies, we design robots that are smarter, faster, and more adaptable."
+  description: "At Telamonix Robotics, we push the boundaries of robotics to create intelligent systems that enrich daily life and revolutionize industries. Combining advanced Computer Vision, Spatial Perception, and AI technologies, we design robots that are smarter, faster, and more adaptable."
 };
 
 export const roboticsNews: InfoCardProps[] = [
@@ -1169,7 +1169,7 @@ export const fnbOfferItems = [
 export const investmentHeading = {
   title: "Investment & Venture Builder",
   subtitle: "Fueling Innovation. Empowering Visionaries.",
-  description: "Naiscorp’s Investment & Venture Builder division is dedicated to nurturing the next generation of groundbreaking ideas. By investing in early-stage startups and supporting research, we empower innovators to create solutions with global impact."
+  description: "Telamonix’s Investment & Venture Builder division is dedicated to nurturing the next generation of groundbreaking ideas. By investing in early-stage startups and supporting research, we empower innovators to create solutions with global impact."
 };
 
 export const investmentInfo = [
@@ -2012,7 +2012,7 @@ export const navbarLinksVI = [
 export const aboutColumn = {
   title: 'About',
   links: [
-    { text: 'About Naiscorp', href: '/about' },
+    { text: 'About Telamonix', href: '/about' },
     { text: 'News', href: '/news' },
     { text: 'Careers', href: '/careers' },
     { text: 'Contact', href: '/contact' },
@@ -2022,7 +2022,7 @@ export const aboutColumn = {
 export const aboutColumnZH = {
   title: '关于',
   links: [
-    { text: '关于 Naiscorp', href: '/zh/guanyu' },
+    { text: '关于 Telamonix', href: '/zh/guanyu' },
     { text: '新闻', href: '/zh/xinwen' },
     { text: '职业发展', href: '/zh/zhiye' },
     { text: '联系我们', href: '/zh/lianxi' },
@@ -2032,7 +2032,7 @@ export const aboutColumnZH = {
 export const aboutColumnVI = {
   title: 'Giới thiệu',
   links: [
-    { text: 'Về Naiscorp', href: '/vi/ve_chung_toi' },
+    { text: 'Về Telamonix', href: '/vi/ve_chung_toi' },
     { text: 'Tin tức', href: '/vi/tin_tuc' },
     { text: 'Tuyển dụng', href: '/vi/nghe_nghiep' },
     { text: 'Liên hệ', href: '/vi/lien_he' },
@@ -2109,8 +2109,8 @@ export const divisionsColumnVI = {
 };
 
 export const contactColumn = {
-  subtitle: `Naiscorp is a leading technology service company providing digital transformation solutions, developing AI, Big Data, Robotics, and Big Apps; providing customers with high quality products, services, and solutions to help transform the world.
-  Established in 2006, led by Tai Nguyen, invested by IDGVV and Softbank.`,
+  subtitle: `Telamonix is a leading technology service company providing digital transformation solutions, developing AI, Big Data, Robotics, and Big Apps; providing customers with high quality products, services, and solutions to help transform the world.
+  Established in 2006, led by Dat Nguyen, invested by IDGVV and Softbank.`,
   items: [     
     {   
       name: 'address',
@@ -2125,14 +2125,14 @@ export const contactColumn = {
     {
       name: 'email',
       icon: '/svgs/mail.svg',
-      text: 'tai.nguyen@naiscorp.com',
+      text: 'tai.nguyen@Telamonix.com',
     },
   ],
 };
 
 export const contactColumnZH = {
-  subtitle: `Naiscorp 是领先的技术服务公司，提供数字化转型解决方案，开发 AI、大数据、机器人和大型应用；为客户提供高质量的产品、服务和解决方案，以帮助改变世界。
-  成立于 2006 年，由 Tai Nguyen 领导，获得 IDGVV 和 Softbank 投资。`,
+  subtitle: `Telamonix 是领先的技术服务公司，提供数字化转型解决方案，开发 AI、大数据、机器人和大型应用；为客户提供高质量的产品、服务和解决方案，以帮助改变世界。
+  成立于 2006 年，由 Dat Nguyen 领导，获得 IDGVV 和 Softbank 投资。`,
   items: [     
     {   
       name: '地址',
@@ -2147,14 +2147,14 @@ export const contactColumnZH = {
     {
       name: '电子邮件',
       icon: '/svgs/mail.svg',
-      text: 'tai.nguyen@naiscorp.com',
+      text: 'tai.nguyen@Telamonix.com',
     },
   ],
 };
 
 export const contactColumnVI = {
-  subtitle: `Naiscorp là công ty dịch vụ công nghệ hàng đầu cung cấp các giải pháp chuyển đổi số, phát triển AI, Dữ liệu lớn, Robot và Ứng dụng quy mô lớn; mang đến cho khách hàng những sản phẩm, dịch vụ và giải pháp chất lượng cao để giúp thay đổi thế giới.
-  Thành lập năm 2006, do Tai Nguyen lãnh đạo, được đầu tư bởi IDGVV và Softbank.`,
+  subtitle: `Telamonix là công ty dịch vụ công nghệ hàng đầu cung cấp các giải pháp chuyển đổi số, phát triển AI, Dữ liệu lớn, Robot và Ứng dụng quy mô lớn; mang đến cho khách hàng những sản phẩm, dịch vụ và giải pháp chất lượng cao để giúp thay đổi thế giới.
+  Thành lập năm 2006, do Dat Nguyen lãnh đạo, được đầu tư bởi IDGVV và Softbank.`,
   items: [     
     {   
       name: 'Địa chỉ',
@@ -2169,7 +2169,7 @@ export const contactColumnVI = {
     {
       name: 'Email',
       icon: '/svgs/mail.svg',
-      text: 'tai.nguyen@naiscorp.com',
+      text: 'tai.nguyen@Telamonix.com',
     },
   ],
 };
@@ -2201,12 +2201,12 @@ export const languageMap = {
 export const socialLinks: SocialLink[] = [
   {
     name: 'YouTube',
-    href: 'https://www.youtube.com/@Naiscorpcomputefuture',
+    href: 'https://www.youtube.com/@Telamonixcomputefuture',
     icon: '/svgs/Youtube.svg'
   },
   {
     name: 'LinkedIn',
-    href: 'https://www.linkedin.com/company/naiscorp',
+    href: 'https://www.linkedin.com/company/Telamonix',
     icon: '/svgs/LinkedIn.svg'
   },
   {

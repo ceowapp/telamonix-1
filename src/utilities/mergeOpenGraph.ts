@@ -3,10 +3,10 @@ import { getServerSideURL } from './getURL'
 
 const defaultOpenGraph: Metadata['openGraph'] = {
   type: 'website',
-  title: "NaisCorp",
+  title: "Telamonix",
   description: "The connected workspace where better, faster work happens.",
-  url: 'https://naiscorp.vercel.app',
-  siteName: 'NaisCorp',
+  url: 'https://telamonix.vercel.app',
+  siteName: 'Telamonix',
   images: [
     {
       url: '/images/logo.png',

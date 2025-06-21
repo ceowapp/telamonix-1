@@ -179,7 +179,8 @@ const ProjectShowcase = () => {
     <div className="w-[420px] xl:w-[520px] h-[280px] xl:h-[360px] rounded-2xl border-2 border-cyan-400/50 shadow-2xl shadow-cyan-400/30 bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center relative overflow-hidden">
       {/* Animated background */}
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 to-purple-900/20" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_rgba(0,0,0,0.3)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transpare
+      nt_0%,_rgba(0,0,0,0.3)_100%)]" />
       
       {/* Content */}
       <div className="relative z-10 text-center p-8">
@@ -291,15 +292,14 @@ const ProjectShowcase = () => {
   return (
     <div ref={containerRef} className="relative min-h-screen overflow-hidden bg-black">
       {/* Video Source Toggle (for development) */}
-      <div className="fixed top-4 right-4 z-50">
+      <div className="fixed top-2 sm:top-4 right-2 sm:right-4 z-50">
         <button
           onClick={() => setUseYouTube(!useYouTube)}
-          className="px-4 py-2 bg-cyan-500/20 border border-cyan-500/50 rounded-lg text-cyan-400 text-sm font-mono hover:bg-cyan-500/30 transition-colors"
+          className="px-2 sm:px-4 py-1.5 sm:py-2 bg-cyan-500/20 border border-cyan-500/50 rounded-lg text-cyan-400 text-xs sm:text-sm font-mono hover:bg-cyan-500/30 transition-colors"
         >
-          {useYouTube ? 'YouTube ON' : 'Placeholder'}
+          {useYouTube ? 'YouTube' : 'Demo'}
         </button>
       </div>
-
       {/* Futuristic Background */}
       <div className="absolute inset-0 z-0">
         {/* Animated Grid */}
@@ -463,100 +463,102 @@ const ProjectShowcase = () => {
 
         {/* Mobile/Tablet Layout */}
         <div className="block lg:hidden">
-          <div className="px-4 sm:px-6 md:px-8 py-8">
-            {projects.map((project, index) => (
-              <div key={project.id} className="mb-16 last:mb-0">
-                {/* Video Section */}
-                <div className="mb-8 flex justify-center">
-                  <div className="relative">
-                    {/* Glowing backdrop */}
-                    <div className="absolute -inset-4 bg-gradient-to-r from-cyan-400/20 to-purple-600/20 rounded-2xl blur-xl" />
+          <div className="px-4 sm:px-6 md:px-8 py-8 pt-20 sm:pt-24 md:pt-24">
+            {/* Add safe area support */}
+            <div style={{ paddingTop: 'env(safe-area-inset-top)' }}>
+              {projects.map((project, index) => (
+                <div key={project.id} className="mb-16 last:mb-8">
+                  {/* Video Section */}
+                  <div className="mb-8 flex justify-center">
+                    <div className="relative w-full max-w-md">
+                      {/* Glowing backdrop */}
+                      <div className="absolute -inset-4 bg-gradient-to-r from-cyan-400/20 to-purple-600/20 rounded-2xl blur-xl" />
 
-                    {/* Video container */}
-                    <div className="relative">
-                      {useYouTube ? (
-                        <MobileYouTubeEmbed 
-                          embedId={project.embedId} 
-                          title={project.title}
-                        />
-                      ) : (
-                        <MobilePlaceholderVideo title={project.title} />
-                      )}
+                      {/* Video container */}
+                      <div className="relative">
+                        {useYouTube ? (
+                          <MobileYouTubeEmbed 
+                            embedId={project.embedId} 
+                            title={project.title}
+                          />
+                        ) : (
+                          <MobilePlaceholderVideo title={project.title} />
+                        )}
 
-                      {/* Video info overlay */}
-                      <div className="absolute bottom-3 left-3 right-3 bg-black/70 backdrop-blur-sm rounded-lg p-2 border border-cyan-400/30">
-                        <div className="text-white font-mono text-xs sm:text-sm">
-                          Project {String(index + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
+                        {/* Video info overlay */}
+                        <div className="absolute bottom-3 left-3 right-3 bg-black/70 backdrop-blur-sm rounded-lg p-2 border border-cyan-400/30">
+                          <div className="text-white font-mono text-xs sm:text-sm">
+                            Project {String(index + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Project Info Section */}
+                  <div className="relative max-w-2xl mx-auto">
+                    {/* Gradient Tiles Background */}
+                    <GradientTiles />
+
+                    <div className="relative z-10 p-4 sm:p-6 md:p-8 bg-black/20 backdrop-blur-sm rounded-2xl border border-cyan-400/10">
+                      {/* Project Number */}
+                      <div className="flex items-center mb-4 sm:mb-6">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full border-2 border-cyan-400 flex items-center justify-center text-cyan-400 font-mono text-xs sm:text-sm md:text-lg mr-3 sm:mr-4 md:mr-6 shadow-lg shadow-cyan-400/30 bg-cyan-400/10">
+                          {String(index + 1).padStart(2, '0')}
+                        </div>
+                        <div className="h-px bg-gradient-to-r from-cyan-400 via-purple-400 to-transparent flex-1" />
+                      </div>
+
+                      {/* Project Title */}
+                      <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-white via-cyan-400 to-purple-400 bg-clip-text text-transparent mb-3 sm:mb-4 md:mb-6 font-mono tracking-tight leading-tight">
+                        {project.title}
+                      </h2>
+
+                      {/* Project Description */}
+                      <p className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6 md:mb-8 font-light">
+                        {project.description}
+                      </p>
+
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6 md:mb-8">
+                        {project.tags.map((tag, tagIndex) => (
+                          <span
+                            key={tagIndex}
+                            className="px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 text-xs sm:text-sm font-mono bg-cyan-400/10 border border-cyan-400/30 rounded-full text-cyan-400 hover:bg-cyan-400/20 transition-all duration-300"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* CTA Button */}
+                      <button className="group relative w-full sm:w-auto px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full text-white font-semibold text-sm sm:text-base overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-400/25">
+                        <span className="relative z-10 flex items-center justify-center">
+                          Explore Project
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                          </svg>
+                        </span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      </button>
+
+                      {/* Project Stats */}
+                      <div className="mt-4 sm:mt-6 md:mt-8 flex flex-col sm:flex-row space-y-1 sm:space-y-0 sm:space-x-6 md:space-x-8 text-xs sm:text-sm text-gray-400">
+                        <div>
+                          <span className="text-cyan-400 font-mono">STATUS:</span> Active
+                        </div>
+                        <div>
+                          <span className="text-cyan-400 font-mono">YEAR:</span> {2024 - index}
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-
-                {/* Project Info Section */}
-                <div className="relative max-w-2xl mx-auto">
-                  {/* Gradient Tiles Background */}
-                  <GradientTiles />
-
-                  <div className="relative z-10 p-6 sm:p-8 bg-black/20 backdrop-blur-sm rounded-2xl border border-cyan-400/10">
-                    {/* Project Number */}
-                    <div className="flex items-center mb-6">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-cyan-400 flex items-center justify-center text-cyan-400 font-mono text-sm sm:text-lg mr-4 sm:mr-6 shadow-lg shadow-cyan-400/30 bg-cyan-400/10">
-                       {String(index + 1).padStart(2, '0')}
-                     </div>
-                     <div className="h-px bg-gradient-to-r from-cyan-400 via-purple-400 to-transparent flex-1" />
-                   </div>
-
-                   {/* Project Title */}
-                   <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-white via-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4 sm:mb-6 font-mono tracking-tight leading-tight">
-                     {project.title}
-                   </h2>
-
-                   {/* Project Description */}
-                   <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 font-light">
-                     {project.description}
-                   </p>
-
-                   {/* Tags */}
-                   <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8">
-                     {project.tags.map((tag, tagIndex) => (
-                       <span
-                         key={tagIndex}
-                         className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-mono bg-cyan-400/10 border border-cyan-400/30 rounded-full text-cyan-400 hover:bg-cyan-400/20 transition-all duration-300"
-                       >
-                         {tag}
-                       </span>
-                     ))}
-                   </div>
-
-                   {/* CTA Button */}
-                   <button className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full text-white font-semibold overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-400/25">
-                     <span className="relative z-10 flex items-center justify-center">
-                       Explore Project
-                       <svg className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                       </svg>
-                     </span>
-                     <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                   </button>
-
-                   {/* Project Stats */}
-                   <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-8 text-sm text-gray-400">
-                     <div>
-                       <span className="text-cyan-400 font-mono">STATUS:</span> Active
-                     </div>
-                     <div>
-                       <span className="text-cyan-400 font-mono">YEAR:</span> {2024 - index}
-                     </div>
-                   </div>
-                 </div>
-               </div>
-             </div>
-           ))}
-         </div>
-       </div>
-     </div>
-
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
      {/* Scroll Indicator - Desktop Only */}
      <div className="hidden lg:block fixed bottom-8 left-1/2 transform -translate-x-1/2 z-30">
        <div className="flex flex-col items-center text-cyan-400/60 text-sm font-mono">

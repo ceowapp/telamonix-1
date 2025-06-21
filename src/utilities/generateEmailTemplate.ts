@@ -97,7 +97,7 @@ export function generateContactEmailTemplate(name, email, phone, message) {
       <div class="email-container">
         <div class="header">
           <h1>New Contact Form Message -</h1>
-          <h1>NaisCorp</h1>
+          <h1>Telamonix</h1>
         </div>
         <div class="content">
           <p>You've received a new message from your contact form.</p>
@@ -127,8 +127,8 @@ export function generateContactEmailTemplate(name, email, phone, message) {
           <p>Please respond to this inquiry at your earliest convenience.</p>
         </div>
        <div class="footer">
-        <p class="footer-first">This email was sent from your website's contact form - NaisCorp.</p>
-        <p class="footer-last">© ${new Date().getFullYear()} NaisCorp. All rights reserved.</p>
+        <p class="footer-first">This email was sent from your website's contact form - Telamonix.</p>
+        <p class="footer-last">© ${new Date().getFullYear()} Telamonix. All rights reserved.</p>
       </div>
       </div>
     </body>
@@ -241,7 +241,7 @@ export function generateCareerEmailTemplate(name, email, phone, job, availableTi
       <div class="email-container">
         <div class="header">
           <h1>New Career Application -</h1>
-          <h1>NaisCorp</h1>
+          <h1>Telamonix</h1>
         </div>
         <div class="content">
           <p>You've received a new job application.</p>
@@ -290,8 +290,8 @@ export function generateCareerEmailTemplate(name, email, phone, job, availableTi
           <p>Please review this application at your earliest convenience.</p>
         </div>
         <div class="footer">
-          <p class="footer-first">This email was sent from your website's career application form - NaisCorp.</p>
-          <p class="footer-last">© ${new Date().getFullYear()} NaisCorp. All rights reserved.</p>
+          <p class="footer-first">This email was sent from your website's career application form - Telamonix.</p>
+          <p class="footer-last">© ${new Date().getFullYear()} Telamonix. All rights reserved.</p>
         </div>
       </div>
     </body>

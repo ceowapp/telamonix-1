@@ -306,6 +306,7 @@ body {
 .grid__item-label {
   line-height: 1.4;
   margin: 0;
+  padding-bottom: 1rem;
   color: white; /* Added for visibility */
   font-weight: 600; /* Added for emphasis */
 }
@@ -316,7 +317,7 @@ body {
   border: 1px solid #2a2b3a;
   border-radius: 1em;
   line-height: 0.75;
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem 0rem;
   font-size: 0.85rem;
   color: #a78bfa; /* Added for visibility */
 }
@@ -1307,7 +1308,7 @@ layer base {
   .text-body-large-1 {
     @apply font-normal
       !text-[13px] sm:!text-[14px] md:!text-[15px] lg:!text-[16px]
-      !text-[#E2E8F0];
+      !text-[#6D6D6D];
   }
 
   .text-title-medium-black-3 {
@@ -1356,7 +1357,7 @@ layer base {
     @apply font-normal
       !text-[15px] sm:!text-[16px] md:!text-[17px] lg:!text-[18px]
       !leading-[20px] sm:!leading-[24px] md:!leading-[24px] lg:!leading-[24px]
-      text-[#E2E8F0];
+      text-[#6D6D6D];
   }
 
   .text-body-large-grey {
@@ -1517,7 +1518,7 @@ layer base {
   .text-headline-large {
     @apply font-bold
       !text-[26px] sm:!text-[28px] md:!text-[30px] lg:!text-[32px]
-      !text-[#FFFFFF];
+      !text-[#454545];
   }
 
   .text-headline-large-white {

@@ -60,7 +60,7 @@ const ContactFloatingBar = () => {
   ];
 
   return (
-    <div className="fixed left-5 bottom-32 z-50 flex flex-col items-start">
+    <div className="fixed left-5 bottom-32 z-[100] flex flex-col items-start">
       {/* Toggle Button */}
       <motion.button
         className="w-14 h-14 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 flex justify-center items-center text-white shadow-lg shadow-indigo-400/30 z-10 my-3"

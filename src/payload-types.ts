@@ -328,7 +328,7 @@ export interface Page {
     twitter?: {
       card?: ('summary' | 'summary_large_image' | 'app' | 'player') | null;
       /**
-       * Twitter handle for the website (e.g., @naiscorp)
+       * Twitter handle for the website (e.g., @telamonix)
        */
       site?: string | null;
       /**

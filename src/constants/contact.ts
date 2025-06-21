@@ -80,21 +80,21 @@ export const contactData = {
   title: 'Ready to',
   subtitle: 'get in touch?',
   description: 'Leave your business information below, we will contact you as soon as possible!',
-  quote: 'Partner with Naiscorp to transform your business with technology that drives sustainability, reduces costs, and unlocks new levels of productivity. Let us help you achieve more with less.'
+  quote: 'Partner with Telamonix to transform your business with technology that drives sustainability, reduces costs, and unlocks new levels of productivity. Let us help you achieve more with less.'
 };
 
 export const contactDataZH = {
   title: '准备好',
   subtitle: '与我们联系了吗？',
   description: '请留下您的业务信息，我们会尽快与您联系！',
-  quote: '与 Naiscorp 合作，通过技术实现可持续发展、降低成本，并解锁新的生产力水平。让我们帮助您以更少的投入获得更大的成就。',
+  quote: '与 Telamonix 合作，通过技术实现可持续发展、降低成本，并解锁新的生产力水平。让我们帮助您以更少的投入获得更大的成就。',
 };
 
 export const contactDataVI = {
   title: 'Sẵn sàng',
   subtitle: 'liên hệ với chúng tôi?',
   description: 'Hãy để lại thông tin doanh nghiệp của bạn, chúng tôi sẽ liên hệ lại sớm nhất có thể!',
-  quote: 'Hợp tác với Naiscorp để chuyển đổi doanh nghiệp của bạn bằng công nghệ giúp phát triển bền vững, giảm chi phí và nâng cao năng suất. Chúng tôi giúp bạn đạt được nhiều hơn với ít hơn.',
+  quote: 'Hợp tác với Telamonix để chuyển đổi doanh nghiệp của bạn bằng công nghệ giúp phát triển bền vững, giảm chi phí và nâng cao năng suất. Chúng tôi giúp bạn đạt được nhiều hơn với ít hơn.',
 };
 
 export const languageData = {

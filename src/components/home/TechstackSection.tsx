@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Code, Globe, Shield, Database, Cpu, Zap } from 'lucide-react';
+import { Code, Globe, Shield, Database, Cpu, Zap, Smartphone, Cloud, PieChart, Brain, Server, Wand2 } from 'lucide-react'; // Added new icons
 import { gsap } from 'gsap'; // Import GSAP
 
 // Linear interpolation
@@ -171,36 +171,78 @@ const TechStackItem = ({ icon: Icon, label, tag }) => {
 };
 
 const TechstackSection = () => {
-  const projects = [
+   const techs = [
+    // Web Development
     {
       icon: Globe,
-      label: "We assisted CloudMasters in creating a modern and scalable website, optimizing speed, integrating cloud-based hosting solutions.",
-      tag: "Web Development"
+      label: "Modern web development with React, Vue, or Angular for dynamic and responsive user interfaces.",
+      tag: "Frontend Development"
     },
     {
       icon: Code,
-      label: "We developed a professional website for TechGenius, focusing on user-friendly design and seamless navigation.",
-      tag: "Web Design"
-    },
-    {
-      icon: Zap,
-      label: "We designed and developed a visually appealing website for CodeCrafters, highlighting their coding expertise.",
-      tag: "Branding"
+      label: "Robust backend systems using Node.js, Python (Django/Flask), or Ruby on Rails.",
+      tag: "Backend Development"
     },
     {
       icon: Database,
-      label: "We revamped the website for DataTech Solutions, focusing on intuitive data visualization & clear messaging.",
-      tag: "Web Design"
+      label: "Database management with PostgreSQL, MongoDB, or MySQL for scalable data storage.",
+      tag: "Database Management"
     },
     {
-      icon: Shield,
-      label: "We provided a comprehensive website overhaul for CyberShield, implementing advanced security features and SSL encryption.",
-      tag: "Web Development"
+      icon: Server,
+      label: "Cloud deployment and infrastructure on AWS, Azure, or Google Cloud Platform.",
+      tag: "Cloud Infrastructure"
+    },
+
+    // Mobile Development
+    {
+      icon: Smartphone,
+      label: "Native iOS applications using Swift and SwiftUI for exceptional performance and UI.",
+      tag: "iOS Native Development"
+    },
+    {
+      icon: Smartphone,
+      label: "Native Android applications developed with Kotlin and Jetpack Compose for modern experiences.",
+      tag: "Android Native Development"
+    },
+    {
+      icon: Zap,
+      label: "Cross-platform mobile apps built with React Native or Flutter for efficient development.",
+      tag: "Cross-Platform Mobile"
+    },
+
+    // Data Analytics
+    {
+      icon: PieChart,
+      label: "Data processing and analysis using Python (Pandas, NumPy) and R for statistical modeling.",
+      tag: "Data Processing & Analysis"
+    },
+    {
+      icon: Database,
+      label: "Big data solutions with Apache Spark, Hadoop, and data warehousing on Snowflake or BigQuery.",
+      tag: "Big Data & Warehousing"
+    },
+    {
+      icon: Cloud,
+      label: "Business intelligence and visualization with Tableau, Power BI, and Google Looker Studio.",
+      tag: "BI & Data Visualization"
+    },
+
+    // AI Solutions
+    {
+      icon: Brain,
+      label: "Machine Learning models developed with TensorFlow, PyTorch, and Scikit-learn.",
+      tag: "Machine Learning"
     },
     {
       icon: Cpu,
-      label: "We created an engaging website for RoboTech, featuring immersive visuals, interactive elements, and clear product descriptions.",
-      tag: "Backend"
+      label: "Natural Language Processing (NLP) solutions using libraries like SpaCy and Hugging Face Transformers.",
+      tag: "Natural Language Processing"
+    },
+    {
+      icon: Wand2,
+      label: "Computer Vision applications for image processing and object detection with OpenCV.",
+      tag: "Computer Vision"
     }
   ];
 
@@ -227,7 +269,7 @@ const TechstackSection = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {techs.map((project, index) => (
             <TechStackItem
               key={index}
               icon={project.icon}

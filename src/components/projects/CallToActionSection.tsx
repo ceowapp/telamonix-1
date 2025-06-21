@@ -333,7 +333,7 @@ const CallToActionComponent: React.FC = () => {
                     {/* Main content */}
                     <div className="relative text-center">
                         
-                        <h1 className="text-6xl lg:text-8xl font-black bg-gradient-to-r from-white via-purple-200 to-blue-300 bg-clip-text text-transparent leading-tight mb-8">
+                        <h1 className="text-4xl sm:text-6xl lg:text-8xl font-black bg-gradient-to-r from-white via-purple-200 to-blue-300 bg-clip-text text-transparent leading-tight mb-8">
                             <span className="block">TRANSCEND</span>
                             <span className="block text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 bg-clip-text animate-pulse">
                                 REALITY

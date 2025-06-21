@@ -14,7 +14,7 @@ const CompanyLogo: React.FC<CompanyLogoProps> = ({ imageUrl, language = 'en' }) 
       <Link href={`/${language}`} className="flex items-center">
         <Image 
           src={imageUrl} 
-          alt="Naiscorp Logo" 
+          alt="Telamonix Logo" 
           width={200} 
           height={48} 
           className="h-8 w-auto xs:h-[20px] sm:h-10 md:h-11 lg:h-12 object-contain"

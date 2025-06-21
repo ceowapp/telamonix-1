@@ -28,7 +28,7 @@ const FallbackComponent = React.memo(() => {
         <h1 className="text-display-regular-white !leading-[44px] mb-10 sm:mb-10 md:mb-2">
           Get your<br />
           best job<br />
-          at Naiscorp
+          at Telamonix
         </h1>
       </div>
     </div>

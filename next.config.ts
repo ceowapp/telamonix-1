@@ -73,7 +73,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'naiscorp.vercel.app',
+        hostname: 'telamonix.vercel.app',
       },
       {
         protocol: 'https',
@@ -127,7 +127,7 @@ const nextConfig: NextConfig = {
 
 const sentryConfig = {
   org: "wapp-4y",
-  project: "naiscorp",
+  project: "telamonix",
   silent: !process.env.CI,
   widenClientFileUpload: true,
   reactComponentAnnotation: {
